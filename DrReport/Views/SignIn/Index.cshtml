@@ -1,0 +1,67 @@
+﻿@model User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <!--bootstrap css link-->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!--Css Link-->
+    <link rel="stylesheet" href="~/Styles/Login/login.css">
+</head>
+<body>
+    @if (!string.IsNullOrEmpty(ViewBag.message))
+        {
+            <div class="alert alert-warning" role="alert">@ViewBag.message</div>
+        }
+
+    <!--section with margin 4,3-->
+    <section class="form my-4 mx-3">
+        <div class="container">
+            <div class="row no-gutters">
+                <!--the left side  "Image"-->
+                <div class="col-lg-6">
+                    <img src="~/Styles/Login/Images/main.png" class="img-fluid" alt="">
+                </div>
+                <!--the right side  "form"-->
+                <div class="col-lg-6 px-7 pt-5">
+                    <form asp-controller="Signin" asp-action="Signin" method="post" class="mx-5 mt-5">
+                        <h1 class="head_login">LOG IN</h1>
+                        <!--row1 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <input asp-for="Email" type="email" placeholder="Email-Address" class="form-control my-3 p-4">
+                            </div>
+                        </div>
+                        <!--row2 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <input asp-for="Password" type="password" placeholder="Password" class="form-control my-3 p-4">
+                            </div>
+                        </div>
+                        <!--row3 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <button type="submit" class="btn_login">Login</button>
+                            </div>
+                        </div>
+
+                        <!--row4 -->
+                        <div class="my-3 mr-3">
+                            <hr>
+                            <span class="txt_newacount">New to Dr-Report ? </span>
+                            <a href="/patientsignup/index"> <b><u>  Sign Up</u></b></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

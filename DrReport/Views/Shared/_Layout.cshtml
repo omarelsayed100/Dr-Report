@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <!--fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <!--bootstrap css link-->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!--css link-->
+    <link rel="stylesheet" href="~/Styles/Main/main.css">
+</head>
+
+<body>
+    <!--=============Start nav bar============ -->
+    <nav class="navbar navbar-expand-lg  ">
+        <!--logo icon-->
+        <a class="pl-5" href="#"><img src="~/Styles/Main/Images/logo2.png" width="auto" height="60px" alt=""></a>
+        <!--collapse button-->
+        <a href="#x" data-toggle="collapse" class="navbar-toggler navbar-light">
+            <span class="navbar-toggler-icon"></span>
+        </a>
+
+        <!-- makes the main nav items in the center-->
+        <div class="container d-flex align-items-center">
+            <!--nav bar items-->
+            <div id="x" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <!--item1-->
+                    <li class="nav-item"><a href="#" class="nav-link mx-5 ">Your Medical History </a></li>
+                    <!--item2-->
+                    <li class="nav-item"><a href="#" class="nav-link mx-5 ">Inform Symptoms</a></li>
+                    <!--item3-->
+                    <li class="nav-item"><a href="#" class="nav-link mx-5 ">Your Results</a></li>
+                    <!--item4-->
+                    <li class="nav-item">
+                        <button class="btn_appointment  mx-5" type="button">Make Appointment</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- drop down user account-->
+        <div id="x" class="collapse navbar-collapse  ">
+            <div class="navbar-nav dropdown">
+                <a class="nav-link mx-5 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <!-- item 1 Account-->
+                    <a class="dropdown-item" href="#">
+                        <i class="bi bi-person-circle pr-2"></i>Account
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <!-- item 2 Settings-->
+                    <a class="dropdown-item" href="#">
+                        <i class="bi bi-gear-fill pr-2"></i>Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <!-- item 3 Logout-->
+                    <a class="dropdown-item" href="/SignIn/Index">
+                        <i class="bi bi-box-arrow-right pr-2"></i>Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End drop down user account-->
+    </nav>
+    <!--============End nav bar============-->
+
+            @RenderBody()
+
+    <!--============Footer============-->
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Medical_Diagnosis -
+            <a href="#" class="mx-2">Terms Of Use</a>
+            <a href="#" class="mx-2">About Us</a>
+            <a href="#" class="mx-2">Privacy</a>
+        </div>
+    </footer>
+
+    <!--links of js if needed-->
+    <script src="~/Styles/popper.min.js"></script>
+    <script src="~/Styles/jquery-3.6.0.min.js"></script>
+    <script src="~/Styles/bootstrap.js"></script>
+
+</body>
+
+</html>

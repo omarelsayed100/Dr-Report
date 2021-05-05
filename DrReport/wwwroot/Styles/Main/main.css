@@ -1,0 +1,70 @@
+/*Layout*/
+nav{
+    background-color: #fff;
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
+}
+
+.nav-link{
+    font-size: 14px;
+    color: #221e41;;
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn_appointment{
+    background: #4461D7;
+    padding: 8px ;
+    border-radius:  4px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border:none;
+    text-align: center;
+}
+.btn_appointment:hover{
+    background-color: #0b58a0;  
+    color: white; 
+}
+.footer {
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+  }
+  .dropdown-item{
+    color: #2D82B5;
+    font-family:'Roboto Slab', serif;
+    font-size:14px
+} 
+    /*slider*/
+  .carousel-item {
+    height: 640px;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    position: relative;
+    background-size: cover;
+    
+  }
+  .container_{
+    text-align: center;
+    top: 40%;
+    right: 25%;
+    position: relative;
+  }
+.header_carousel{
+      font-family:'Roboto Slab', serif;
+      font-size: 62px;
+      color: #221e41;
+}
+.body_carousel{
+    padding-top: 10px;
+    font-family:'Roboto Slab', serif;
+    font-size: 22px;
+    color:#757384;
+}
+
+  
