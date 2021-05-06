@@ -30,7 +30,7 @@ namespace DrReport.Controllers
                 patient.User.IsDeleted = false;
                 _context.Add(patient);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "PatientHome");
+                return RedirectToAction("Index", "SignIn");
             }
             return RedirectToAction("Index");
         }

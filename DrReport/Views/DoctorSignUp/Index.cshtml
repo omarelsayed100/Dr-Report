@@ -1,4 +1,4 @@
-﻿
+﻿@model DrReport.Models.Doctor
 @{
     Layout = null;
 }
@@ -25,7 +25,7 @@
                 <!--the right side  "form"-->
 
                 <div class="col-lg-6 px-7 pt-5">
-                    <form action="" class="mx-5 ">
+                    <form asp-controller="DoctorSignUp" asp-action="SignUp" method="post" class="mx-5 ">
                         <h1 class="head_signup">SIGN UP</h1>
 
                         <!-- signup as patient /doctor section   "pateint is selected"-->
@@ -42,28 +42,28 @@
                         <!--row1 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input type="text" placeholder="First Name" class="form-control my-1  p-4">
+                                <input asp-for="User.Fname" type="text" placeholder="First Name" class="form-control my-1  p-4">
                             </div>
                         </div>
 
                         <!--row2 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input type="text" placeholder="Last Name" class="form-control my-1 p-4">
+                                <input asp-for="User.Lname" type="text" placeholder="Last Name" class="form-control my-1 p-4">
                             </div>
                         </div>
 
                         <!--row3 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input type="text" placeholder="Phone Number" class="form-control my-1 p-4">
+                                <input asp-for="User.Pn" type="text" placeholder="Phone Number" class="form-control my-1 p-4">
                             </div>
                         </div>
 
                         <!--row3 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input type="text" placeholder="Medical Licence /ID" class="form-control my-1 p-4">
+                                <input asp-for="MedicalLicenseId"  type="text" placeholder="Medical Licence /ID" class="form-control my-1 p-4">
                             </div>
                         </div>
 
@@ -76,21 +76,21 @@
                         <!--row4 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input type="email" placeholder="Email-Address" class="form-control my-1 p-4">
+                                <input asp-for="User.Email" type="email" placeholder="Email-Address" class="form-control my-1 p-4">
                             </div>
                         </div>
 
                         <!--row5 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input type="password" placeholder="Password" class="form-control my-1 p-4">
+                                <input asp-for="User.Password"  type="password" placeholder="Password" class="form-control my-1 p-4">
                             </div>
                         </div>
 
                         <!--row7 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <button type="button" class="btn_register">Register</button>
+                                <button type="submit" class="btn_register">Register</button>
                             </div>
                         </div>
 
