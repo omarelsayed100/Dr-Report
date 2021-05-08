@@ -23,7 +23,6 @@
                     <img src="~/Styles/Signup/Images/main.png" class="img-fluid" alt="">
                 </div>
                 <!--the right side  "form"-->
-
                 <div class="col-lg-6 px-7 pt-5">
                     <form asp-controller="DoctorSignUp" asp-action="SignUp" method="post" class="mx-5 ">
                         <h1 class="head_signup">SIGN UP</h1>
@@ -38,11 +37,11 @@
                                 </ul>
                             </nav>
                         </div>
-
                         <!--row1 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Fname" type="text" placeholder="First Name" class="form-control my-1  p-4">
+                                <span asp-validation-for="User.Fname" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -50,6 +49,8 @@
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Lname" type="text" placeholder="Last Name" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Lname" class="text-danger"></span>
+
                             </div>
                         </div>
 
@@ -57,13 +58,18 @@
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Pn" type="text" placeholder="Phone Number" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Pn" class="text-danger"></span>
+
                             </div>
                         </div>
 
                         <!--row3 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input asp-for="MedicalLicenseId"  type="text" placeholder="Medical Licence /ID" class="form-control my-1 p-4">
+
+                                <input asp-for="MedicalLicenseId" type="text" placeholder="Medical Licence /ID" class="form-control my-1 p-4">
+                                <span asp-validation-for="MedicalLicenseId" class="text-danger"></span>
+
                             </div>
                         </div>
 
@@ -77,13 +83,17 @@
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Email" type="email" placeholder="Email-Address" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Email" class="text-danger"></span>
+
                             </div>
                         </div>
 
                         <!--row5 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input asp-for="User.Password"  type="password" placeholder="Password" class="form-control my-1 p-4">
+                                <input asp-for="User.Password" type="password" placeholder="Password" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Password" class="text-danger"></span>
+
                             </div>
                         </div>
 
