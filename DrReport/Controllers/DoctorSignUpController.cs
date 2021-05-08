@@ -21,11 +21,16 @@ namespace DrReport.Controllers
             return View();
         }
 
+        
+        
         [HttpPost]
-        public ActionResult SignUp(Doctor doctor)
+        public IActionResult SignUp(Doctor doctor)
         {
 
-            if (ModelState.IsValid)
+
+            var check = _context.Users.Select(u => u.Email).Contains(doctor.User.Email);
+
+            if (ModelState.IsValid&&check==false)
             {
                 doctor.User.UserTypeId = 2;
                 doctor.User.IsDeleted = false;
@@ -33,7 +38,7 @@ namespace DrReport.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index", "SignIn");
             }
-            return RedirectToAction("Index");
+            return View("Index");
         }
     }
 }

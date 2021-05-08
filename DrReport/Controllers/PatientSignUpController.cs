@@ -23,8 +23,10 @@ namespace DrReport.Controllers
         [HttpPost]
         public ActionResult SignUp(Patient patient)
         {
-            
-            if (ModelState.IsValid)
+
+            var check = _context.Users.Select(u => u.Email).Contains(patient.User.Email);
+
+            if (ModelState.IsValid && check == false)
             {
                 patient.User.UserTypeId = 1;
                 patient.User.IsDeleted = false;
