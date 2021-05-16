@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrReport.Migrations
 {
     [DbContext(typeof(MedicalDBContext))]
-    [Migration("20210505111450_first_mig")]
-    partial class first_mig
+    [Migration("20210509123413_mm")]
+    partial class mm
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -491,6 +491,7 @@ namespace DrReport.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasMaxLength(1)
                         .IsUnicode(false)
                         .HasColumnType("varchar(1)");

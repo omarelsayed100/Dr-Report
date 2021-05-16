@@ -34,7 +34,7 @@ namespace DrReport.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index", "SignIn");
             }
-            return RedirectToAction("Index");
+            return View("Index");
         }
 
     }

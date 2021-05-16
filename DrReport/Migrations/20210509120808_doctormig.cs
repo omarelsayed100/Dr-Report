@@ -2,7 +2,7 @@
 
 namespace DrReport.Migrations
 {
-    public partial class first_migr : Migration
+    public partial class doctormig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

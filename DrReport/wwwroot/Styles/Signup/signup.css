@@ -42,7 +42,11 @@ img{
 }
 .head_selectaccount{
     font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 25px;
+    font-size: 20px;
     color: #205072;
     padding: 3px;
+}
+.txt_annotation{
+    color:red;
+    font-size:8px;
 }

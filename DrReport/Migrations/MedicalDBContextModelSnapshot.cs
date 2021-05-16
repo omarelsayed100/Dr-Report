@@ -489,6 +489,7 @@ namespace DrReport.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasMaxLength(1)
                         .IsUnicode(false)
                         .HasColumnType("varchar(1)");

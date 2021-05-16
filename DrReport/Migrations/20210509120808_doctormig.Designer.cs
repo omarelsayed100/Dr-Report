@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrReport.Migrations
 {
     [DbContext(typeof(MedicalDBContext))]
-    [Migration("20210505111619_first_migr")]
-    partial class first_migr
+    [Migration("20210509120808_doctormig")]
+    partial class doctormig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

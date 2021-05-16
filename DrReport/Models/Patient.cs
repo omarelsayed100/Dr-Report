@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -17,6 +18,8 @@ namespace DrReport.Models
   
         public int Id { get; set; }
         public int? Age { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Your Gender")]
         public string Gender { get; set; }
         public int UserId { get; set; }
 

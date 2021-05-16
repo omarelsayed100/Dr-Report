@@ -43,7 +43,8 @@
                         <!--row1 in form-->
                         <div class="form-row">
                             <div class="col-lg-10">
-                                <input asp-for="User.Fname" type="text" placeholder="First Name" class="form-control my-1  p-4">
+                                <input asp-for="User.Fname" type="text" placeholder="First Name" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Fname" class="text-danger" style="font-size:small;"></span>
                             </div>
                         </div>
 
@@ -51,12 +52,13 @@
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Lname" type="text" placeholder="Last Name" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Lname" class="text-danger" style="font-size:small;"></span>
                             </div>
                         </div>
 
                         <!--row3 in form-->
                         <div class="form-row">
-                            <div class="col-lg-10">
+                            <div class="col-lg-10 py-1">
                                 <input asp-for="Age" type="number" placeholder="Age" class="form-control my-1 p-4">
                             </div>
                         </div>
@@ -65,6 +67,7 @@
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Pn" type="text" placeholder="Phone Number" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Pn" class="text-danger" style="font-size:small;"></span>
                             </div>
                         </div>
 
@@ -72,6 +75,7 @@
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Email" type="email" placeholder="Email-Address" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Email" class="text-danger" style="font-size:small;"></span>
                             </div>
                         </div>
 
@@ -79,6 +83,7 @@
                         <div class="form-row">
                             <div class="col-lg-10">
                                 <input asp-for="User.Password" type="password" placeholder="Password" class="form-control my-1 p-4">
+                                <span asp-validation-for="User.Password" class="text-danger" style="font-size:small;"></span>
                             </div>
                         </div>
 
@@ -90,7 +95,9 @@
                                 <input id="x" asp-for="Gender" type="radio" name="gender" value="F">
                                 <label for="female">Female </label>
                             </div>
+                            <span asp-validation-for="Gender" class="text-danger px-2" style="font-size:small;"></span>
                         </div>
+                        
 
                         <!--row7 in form-->
                         <div class="form-row">

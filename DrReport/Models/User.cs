@@ -24,7 +24,7 @@ namespace DrReport.Models
         [Required(ErrorMessage = "Please Enter Phone Number")]
         public string Pn { get; set; }
 
-        [Required(ErrorMessage = "Please enter Mail")]
+        [Required(ErrorMessage = "Please Enter E-mail")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please Enter Password")]

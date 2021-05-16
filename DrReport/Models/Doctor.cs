@@ -19,11 +19,9 @@ namespace DrReport.Models
         }
 
         public int Id { get; set; }
-        [Required(ErrorMessage = "Please Enter Medical License Id ")]
         public int? MedicalLicenseId { get; set; }
         public int? ClinicId { get; set; }
         public int UserId { get; set; }
-
         public virtual Clinic Clinic { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Candidate> Candidates { get; set; }
