@@ -1,0 +1,340 @@
+nav{
+  background-color: #fff;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
+}
+.nav-link{
+    font-size: 16px;
+    color: #495057;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+  }
+  
+  .btn_appointment{
+    background: #4461D7;
+    padding: 8px ;
+    border-radius:  4px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: white;
+    border:none;
+    text-align: center;
+  }
+  .btn_appointment:hover{
+    background-color: #0b58a0;  
+    color: white; 
+  }
+  
+  
+.content {
+  margin-inline-start: 5%;
+  border: 1px solid #707070;
+  max-width: 800px;
+  width: 100%;
+}
+
+.step-style {
+  background-color: #f3f5f7;
+  width: 100%;
+  padding-bottom: 30px;
+  display: none;
+  height: 500px;
+}
+.step-style.active {
+  display: flex;
+}
+
+/* step one */
+.step-one {
+  flex-direction: column;
+}
+.step-one .image {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+  padding: 20px 20px 0;
+  box-sizing: border-box;
+}
+.step-one .image img {
+  width: 335px;
+  height: 250px;
+}
+
+.step-one .data {
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.step-one .data h3 {
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+.step-one .data p {
+  max-width: 465px;
+  line-height: 1.3;
+  font-size: 18px;
+}
+/* end step one */
+
+/* step two */
+.step-two {
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+  align-items: center;
+}
+.step-two .image img {
+  width: 280px;
+  height: 325px;
+}
+.step-two .data h3 {
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+.step-two .data h5 {
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+.step-two .data p {
+  padding-inline-start: 15px;
+  margin-bottom: 15px;
+}
+.step-two .input {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.step-two .input span {
+  display: inline-block;
+  margin-inline-start: 10px;
+  font-size: 17px;
+}
+
+/* end step two */
+
+/* step three */
+.step-three {
+  justify-content: center;
+  align-items: center;
+}
+.step-three .data {
+  width: 100%;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.step-three .data .element {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.step-three .data .element p {
+  font-size: 22px;
+  margin: 0;
+  margin-inline-end: 30px;
+  font-weight: bold;
+}
+.step-three .data .element input {
+  margin-inline-end: 50px;
+  margin-inline-start: 50px;
+}
+.step-three .data .element span {
+  font-size: 18px;
+  margin-inline-end: 20px;
+}
+.step-three .data .element:last-of-type {
+  margin-top: 90px;
+}
+.step-three .data .element:last-of-type input {
+  padding: 10px 10px;
+  width: 142px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: 0;
+  margin: 0;
+}
+/* end step three */
+
+/* step four */
+.step-four {
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.step-four .data {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.step-four h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.step-four .data h5 {
+  text-align: center;
+  color: #d65353;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+.step-four .data .element {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.step-four .data .element p {
+  width: 300px;
+  font-size: 17px;
+}
+.step-four .data .element input {
+  margin-inline-end: 5px;
+}
+.step-four .data .element span {
+  margin-inline-end: 35px;
+}
+/* end step four */
+
+/* step five */
+.step-five {
+  padding: 0 20px;
+  box-sizing: border-box;
+  align-items: center;
+}
+.step-five .data {
+  display: flex;
+  flex-direction: column;
+}
+.step-five .data h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.step-five .data p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.step-five .data input {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: 0;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+}
+.step-five .data textarea {
+  resize: none;
+  width: 300px;
+  height: 100px;
+  border: 1px solid #ddd;
+  outline: 0;
+  padding: 15px 10px;
+  border-radius: 4px;
+}
+/* end step five */
+
+/* step six */
+.step-six {
+  padding: 0 20px;
+  box-sizing: border-box;
+  align-items: center;
+}
+.step-six .data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.step-six .data h3 {
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+.step-six .data .element {
+  margin-bottom: 20px;
+}
+.step-six .data input {
+  margin-inline-end: 30px;
+}
+.step-six .data span {
+  font-size: 18px;
+}
+/* end step six */
+
+/* step seven */
+.step-seven {
+  align-items: center;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #FFF;
+}
+.step-seven .image {
+  height: 100%;
+  padding: 20px;
+  margin-inline-end: 30px;
+  background-color: #1576d1;
+}
+.step-seven .data {
+  display: flex;
+  flex-direction: column;
+}
+.step-seven .data p {
+  color: #a6a6a6;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.step-seven .data h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+.step-seven .data h5 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+/* end step seven */
+
+.buttons-container {
+  border-top: 1px solid #707070;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 65px;
+  padding: 0 20px;
+  background-color: #f3f5f7;
+}
+.buttons-container .back {
+  font-size: 20px;
+  color: #1576d1;
+  cursor: pointer;
+  flex-basis: 50%;
+  visibility: hidden;
+}
+.buttons-container .end {
+  flex-basis: 50%;
+  justify-content: flex-end;
+  display: flex;
+}
+.buttons-container .button {
+  width: 105px;
+  height: 40px;
+  background-color: #1576d1;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.buttons-container button#finish {
+  display: none;
+}
+.buttons-container .button.button[disabled] {
+  background-color: #fff;
+  color: #1576d1;
+  cursor: not-allowed;
+}
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 50px; /* Vertically center the text there */
+}

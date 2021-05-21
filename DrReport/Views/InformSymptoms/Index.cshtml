@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./style/bootstrap.css">
+    <link rel="stylesheet" href="~/Styles/Symptoms/style/steps.css">
+    <link rel="stylesheet" href="~/Styles/Symptoms/style/inform.css">
+</head>
+<body>
+    <div class="stepper-container">
+        <div class="steps">
+            <div class="progress">
+                <div class="line"></div>
+            </div>
+            <div class="labels">
+                <ul>
+                    <li class="active">Introduction</li>
+                    <li>Patient</li>
+                    <li>Add Sympotms</li>
+                    <li>Interview</li>
+                    <li>Results</li>
+                </ul>
+            </div>
+        </div> <!-- steps div end -->
+
+        <div class="content">
+            <!-- step one -->
+            <div class="step-style step-one active">
+                <div class="image">
+                    <img src="~/Styles/Symptoms/images/introduction-image.png" alt="">
+                </div>
+                <div class="data">
+                    <h3>Hello!</h3>
+                    <p>You are about to do safe health checkup. Your answers will be carefully analyzed and you 'll learn about possible causes of your symptoms. about possible causes of your symptoms.</p>
+                </div>
+            </div>
+            <!-- step two -->
+            <div class="step-style step-two">
+                <div class="data">
+                    <h3>Terms of Service</h3>
+                    <h5>Before using the checkup, please read Terms of Service.<br>Remember that:</h5>
+                    <p>
+                        - Checkup is not a diagnosis. Checkup is for informational purposes<br>and is not a qualified medical opinion.
+                    </p>
+                    <p>
+                        - Checkup is not a diagnosis. Checkup is for informational purposes<br>and is not a qualified medical opinion.
+                    </p>
+                    <p>
+                        - Checkup is not a diagnosis. Checkup is for informational purposes<br>and is not a qualified medical opinion.
+                    </p>
+                    <div class="input">
+                        <input type="checkbox" name="terms" onchange="validateTerms()">
+                        <span>I read and accept Terms of Service and Privacy Policy.</span>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="~/Styles/Symptoms/images/tablet.png" alt="">
+                </div>
+            </div>
+            <!-- step three -->
+            <div class="step-style step-three">
+                <div class="data">
+                    <div class="element">
+                        <p>Gender:</p>
+                        <input type="radio" name="gender" onchange="validatePersonDate()"><span>Male</span>
+                        <input type="radio" name="gender" onchange="validatePersonDate()"><span>Female</span>
+                    </div>
+                    <div class="element">
+                        <p>Age:</p>
+                        <input type="number" name="" id="" oninput="validatePersonDate()">
+                    </div>
+                </div>
+            </div>
+            <!-- step four -->
+            <div class="step-style step-four">
+                <div class="data">
+                    <h3>Please check all the statements below that apply to you.</h3>
+                    <h5>Select one answer in each element.</h5>
+                    <div class="element">
+                        <p>I’m overweight or obese</p>
+                        <input type="radio" name="weight" onchange="validatePatientDate()"><span>Yes</span>
+                        <input type="radio" name="weight" onchange="validatePatientDate()"><span>No</span>
+                        <input type="radio" name="weight" onchange="validatePatientDate()"><span>Don't</span>
+                    </div>
+                    <div class="element">
+                        <p>I smoke cigarettes</p>
+                        <input type="radio" name="smoke" onchange="validatePatientDate()"><span>Yes</span>
+                        <input type="radio" name="smoke" onchange="validatePatientDate()"><span>No</span>
+                        <input type="radio" name="smoke" onchange="validatePatientDate()"><span>Don't</span>
+                    </div>
+                    <div class="element">
+                        <p>I’ve recently suffered an injury</p>
+                        <input type="radio" name="suffer" onchange="validatePatientDate()"><span>Yes</span>
+                        <input type="radio" name="suffer" onchange="validatePatientDate()"><span>No</span>
+                        <input type="radio" name="suffer" onchange="validatePatientDate()"><span>Don't</span>
+                    </div>
+                    <div class="element">
+                        <p>I have high cholesterol</p>
+                        <input type="radio" name="high" onchange="validatePatientDate()"><span>Yes</span>
+                        <input type="radio" name="high" onchange="validatePatientDate()"><span>No</span>
+                        <input type="radio" name="high" onchange="validatePatientDate()"><span>Don't</span>
+                    </div>
+                    <div class="element">
+                        <p>I have hypertension</p>
+                        <input type="radio" name="hypertension" onchange="validatePatientDate()"><span>Yes</span>
+                        <input type="radio" name="hypertension" onchange="validatePatientDate()"><span>No</span>
+                        <input type="radio" name="hypertension" onchange="validatePatientDate()"><span>Don't</span>
+                    </div>
+                </div>
+            </div>
+            <!-- step five -->
+            <div class="step-style step-five">
+                <div class="data">
+                    <h3>Add symptoms</h3>
+                    <p>Please use the search. Add as many symptoms as you can for the<br>most accurate results.</p>
+                    <input type="text" name="search" placeholder="Search, e.g headache" oninput="validateSymptoms()">
+                    <textarea placeholder="Please try to add more than one symptom." oninput="validateSymptoms()"></textarea>
+                </div>
+            </div>
+            <!-- step six -->
+            <div class="step-style step-six">
+                <div class="data">
+                    <h3>Do you have any of the following symptoms?</h3>
+                    <div class="element">
+                        <input type="checkbox" onchange="validateQuestions()"><span>Fatigue</span>
+                    </div>
+                    <div class="element">
+                        <input type="checkbox" onchange="validateQuestions()"><span>Fever</span>
+                    </div>
+                    <div class="element">
+                        <input type="checkbox" onchange="validateQuestions()"><span>Feeling sick</span>
+                    </div>
+                    <div class="element">
+                        <input type="checkbox" onchange="validateQuestions()"><span>Vomiting</span>
+                    </div>
+                    <div class="element">
+                        <input type="checkbox" onchange="validateQuestions()"><span>Chills</span>
+                    </div>
+                    <div class="element">
+                        <input type="checkbox" onchange="validateQuestions()"><span>Dizzy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="step-style step-seven">
+                <div class="image">
+                    <img src="~/Styles/Symptoms/images/doctor.svg" alt="">
+                </div>
+                <div class="data">
+                    <p>Recommendation</p>
+                    <h3>Consult a doctor</h3>
+                    <h5>Your symptoms may require medical evaluation. Schedule an appointment<br>with your doctor. If your symptoms get worse, see a doctor immediately.</h5>
+                    <h3>Potential disease</h3>
+                    <p>"Disease name"</p>
+                    <h3>Recommended diagnosis test</h3>
+                    <p>"Diagnosis test name"</p>
+                </div>
+            </div>
+            <!-- buttons -->
+            <div class="buttons-container">
+                <div class="back" onclick="backStep()">
+                    <img src="./images/back.png" alt="">
+                    <span>Back</span>
+                </div>
+                <div class="end">
+                    <button id="next" class="button" onclick="getNextStep()">Next</button>
+                    <button id="finish" class="button">Finish</button>
+                </div>
+            </div>
+        </div> <!-- content div end -->
+
+    </div> <!-- steps container end -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/Styles/Symptoms/script/script.js"></script>
+</body>
+</html>
+
