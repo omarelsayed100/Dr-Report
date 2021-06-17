@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrReport.Migrations
 {
     [DbContext(typeof(MedicalDBContext))]
-    [Migration("20210509120808_doctormig")]
-    partial class doctormig
+    [Migration("20210616154751__mig66")]
+    partial class _mig66
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,6 +106,9 @@ namespace DrReport.Migrations
                     b.Property<DateTime>("ApOpentime")
                         .HasColumnType("date")
                         .HasColumnName("AP_Opentime");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mail")
                         .HasMaxLength(50)
@@ -321,10 +324,6 @@ namespace DrReport.Migrations
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClinicId")
-                        .HasColumnType("int")
-                        .HasColumnName("Clinic_ID");
-
                     b.Property<int?>("MedicalLicenseId")
                         .HasColumnType("int")
                         .HasColumnName("MedicalLicense_ID");
@@ -334,8 +333,6 @@ namespace DrReport.Migrations
                         .HasColumnName("UserID");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClinicId");
 
                     b.HasIndex("UserId");
 
@@ -491,6 +488,7 @@ namespace DrReport.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasMaxLength(1)
                         .IsUnicode(false)
                         .HasColumnType("varchar(1)");
@@ -740,18 +738,11 @@ namespace DrReport.Migrations
 
             modelBuilder.Entity("DrReport.Models.Doctor", b =>
                 {
-                    b.HasOne("DrReport.Models.Clinic", "Clinic")
-                        .WithMany("Doctors")
-                        .HasForeignKey("ClinicId")
-                        .HasConstraintName("FK_Doctor_Clinic");
-
                     b.HasOne("DrReport.Models.User", "User")
                         .WithMany("Doctors")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Doctor_Users")
                         .IsRequired();
-
-                    b.Navigation("Clinic");
 
                     b.Navigation("User");
                 });
@@ -929,8 +920,6 @@ namespace DrReport.Migrations
 
             modelBuilder.Entity("DrReport.Models.Clinic", b =>
                 {
-                    b.Navigation("Doctors");
-
                     b.Navigation("Greserves");
 
                     b.Navigation("Reserves");

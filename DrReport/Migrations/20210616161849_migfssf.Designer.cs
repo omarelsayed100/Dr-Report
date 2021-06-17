@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrReport.Migrations
 {
     [DbContext(typeof(MedicalDBContext))]
-    [Migration("20210509123413_mm")]
-    partial class mm
+    [Migration("20210616161849_migfssf")]
+    partial class migfssf
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,6 +106,9 @@ namespace DrReport.Migrations
                     b.Property<DateTime>("ApOpentime")
                         .HasColumnType("date")
                         .HasColumnName("AP_Opentime");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mail")
                         .HasMaxLength(50)
@@ -322,8 +325,7 @@ namespace DrReport.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("ClinicId")
-                        .HasColumnType("int")
-                        .HasColumnName("Clinic_ID");
+                        .HasColumnType("int");
 
                     b.Property<int?>("MedicalLicenseId")
                         .HasColumnType("int")
@@ -743,8 +745,7 @@ namespace DrReport.Migrations
                 {
                     b.HasOne("DrReport.Models.Clinic", "Clinic")
                         .WithMany("Doctors")
-                        .HasForeignKey("ClinicId")
-                        .HasConstraintName("FK_Doctor_Clinic");
+                        .HasForeignKey("ClinicId");
 
                     b.HasOne("DrReport.Models.User", "User")
                         .WithMany("Doctors")

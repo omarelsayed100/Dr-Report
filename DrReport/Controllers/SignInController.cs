@@ -26,15 +26,18 @@ namespace DrReport.Controllers
         public RedirectToActionResult Signin(User user)
         {
             var checkUser = _context.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
-           // , checkUser.Email
+            // , checkUser.Email
             if (checkUser != null)
             {
                 if (checkUser.UserTypeId==1) 
-                { 
+                {
+                    TempData["accountname"] = checkUser.Fname + " " + checkUser.Lname;
                     return RedirectToAction("Index", "PatientHome");
+
                 }
                 else if (checkUser.UserTypeId== 2)
                 {
+                    TempData["accountname"] = "DR. "+checkUser.Fname + " " + checkUser.Lname;
                     return RedirectToAction("Index", "DoctorHome");
                 }
             }

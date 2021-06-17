@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DrReport.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DrReport.Controllers
@@ -10,6 +11,7 @@ namespace DrReport.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.accountname = TempData["accountname"];
             return View();
         }
     }

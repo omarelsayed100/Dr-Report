@@ -1,0 +1,98 @@
+﻿@model DrReport.Models.Clinic
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <!--bootstrap css link-->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!--style css link-->
+    <link rel="stylesheet" href="~/Styles/Signup/signup.css">
+</head>
+<body>
+    <!--section with margin 4,3-->
+    <section class="form my-4 mx-3">
+        <div class="container">
+            <div class="row no-gutters">
+                <!--the left side  "Image"-->
+                <div class="col-lg-6">
+                    <img class="img-fluid" src="~/Styles/Signup/Images/main.png" alt="">
+                </div>
+                <!--the right side  "form"-->
+                <div class="col-lg-6 px-7 pt-5">
+                    <form asp-controller="ClinicRegister" asp-action="Register" method="post" class="mx-5 ">
+                        <h1 class="head_signup">Register A Clinic</h1>
+
+                        <!--row1 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <input asp-for="Name" type="text" placeholder="Clinic Name" class="form-control my-1  p-4">
+                                <span asp-validation-for="Name" class="text-danger" style="font-size:small;"></span>
+                            </div>
+                        </div>
+
+                        <!--row2 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <input asp-for="Telephone" type="text" placeholder="Telephone" class="form-control my-1 p-4">
+                                <span asp-validation-for="Telephone" class="text-danger" style="font-size:small;"></span>
+
+                            </div>
+                        </div>
+
+                        <!--row3 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <input asp-for="Mail" type="email" placeholder="Mail" class="form-control my-1 p-4">
+                                <span asp-validation-for="Mail" class="text-danger" style="font-size:small;"></span>
+
+                            </div>
+                        </div>
+
+                        <!--row3 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <div>Opening Time:</div>
+                                <input asp-for="ApOpentime" type="date" class="form-control my-1 p-4">
+                                <span asp-validation-for="ApOpentime" class="text-danger" style="font-size:small;"></span>
+
+                            </div>
+                        </div>
+                        <!--row4 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <div>Closing Time:</div>
+                                <input asp-for="ApClosetime" class="form-control my-1 p-4">
+                                <span asp-validation-for="ApClosetime" class="text-danger" style="font-size:small;"></span>
+
+                            </div>
+                        </div>
+
+                        <!--row5 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <input asp-for="Location" placeholder="Location" class="form-control my-1 p-4">
+                                <span asp-validation-for="Location" class="text-danger" style="font-size:small;"></span>
+
+                            </div>
+                        </div>
+
+                        <!--row7 in form-->
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                <button type="submit" class="btn_register">Register</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

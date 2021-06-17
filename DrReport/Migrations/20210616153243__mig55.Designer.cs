@@ -4,14 +4,16 @@ using DrReport.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrReport.Migrations
 {
     [DbContext(typeof(MedicalDBContext))]
-    partial class MedicalDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210616153243__mig55")]
+    partial class _mig55
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,7 +325,8 @@ namespace DrReport.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("ClinicId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Clinic_ID");
 
                     b.Property<int?>("MedicalLicenseId")
                         .HasColumnType("int")
@@ -743,7 +746,8 @@ namespace DrReport.Migrations
                 {
                     b.HasOne("DrReport.Models.Clinic", "Clinic")
                         .WithMany("Doctors")
-                        .HasForeignKey("ClinicId");
+                        .HasForeignKey("ClinicId")
+                        .HasConstraintName("FK_Doctor_Clinic");
 
                     b.HasOne("DrReport.Models.User", "User")
                         .WithMany("Doctors")

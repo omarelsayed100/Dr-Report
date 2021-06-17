@@ -4,14 +4,16 @@ using DrReport.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrReport.Migrations
 {
     [DbContext(typeof(MedicalDBContext))]
-    partial class MedicalDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210616161216_migfss")]
+    partial class migfss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,9 +324,6 @@ namespace DrReport.Migrations
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClinicId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("MedicalLicenseId")
                         .HasColumnType("int")
                         .HasColumnName("MedicalLicense_ID");
@@ -334,8 +333,6 @@ namespace DrReport.Migrations
                         .HasColumnName("UserID");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClinicId");
 
                     b.HasIndex("UserId");
 
@@ -741,17 +738,11 @@ namespace DrReport.Migrations
 
             modelBuilder.Entity("DrReport.Models.Doctor", b =>
                 {
-                    b.HasOne("DrReport.Models.Clinic", "Clinic")
-                        .WithMany("Doctors")
-                        .HasForeignKey("ClinicId");
-
                     b.HasOne("DrReport.Models.User", "User")
                         .WithMany("Doctors")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Doctor_Users")
                         .IsRequired();
-
-                    b.Navigation("Clinic");
 
                     b.Navigation("User");
                 });
@@ -929,8 +920,6 @@ namespace DrReport.Migrations
 
             modelBuilder.Entity("DrReport.Models.Clinic", b =>
                 {
-                    b.Navigation("Doctors");
-
                     b.Navigation("Greserves");
 
                     b.Navigation("Reserves");

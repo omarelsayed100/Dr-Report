@@ -45,7 +45,7 @@ namespace DrReport.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-6I90SI9; Database = MedicalDB ; Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-6I90SI9; Database = MedicalDB ; Trusted_Connection=True;");
             }
         }
 
@@ -133,6 +133,12 @@ namespace DrReport.Models
                     .HasColumnType("date")
                     .HasColumnName("AP_Opentime");
 
+                entity.Property(e => e.DoctorId).HasColumnName("Doctor_ID");
+
+                entity.Property(e => e.Location)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Mail)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -145,6 +151,11 @@ namespace DrReport.Models
                 entity.Property(e => e.Telephone)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Doctor)
+                    .WithMany(p => p.Clinics)
+                    .HasForeignKey(d => d.DoctorId)
+                    .HasConstraintName("FK_Clinic_Doctor");
             });
 
             modelBuilder.Entity<DiagnosisResult>(entity =>
@@ -185,10 +196,6 @@ namespace DrReport.Models
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Type)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -235,6 +242,10 @@ namespace DrReport.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Precaution)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
             });
 
@@ -309,21 +320,21 @@ namespace DrReport.Models
 
             modelBuilder.Entity<DiseaseSymptom>(entity =>
             {
-                entity.HasKey(e => new { e.DiseaseId, e.Symptom });
-
                 entity.ToTable("Disease Symptoms");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.DiseaseId).HasColumnName("Disease_ID");
 
                 entity.Property(e => e.Symptom)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Disease)
                     .WithMany(p => p.DiseaseSymptoms)
                     .HasForeignKey(d => d.DiseaseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Disease Symptoms_Disease");
+                    .HasConstraintName("FK_Disease Symptoms_Disease1");
             });
 
             modelBuilder.Entity<Doctor>(entity =>
@@ -332,16 +343,9 @@ namespace DrReport.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.ClinicId).HasColumnName("Clinic_ID");
-
                 entity.Property(e => e.MedicalLicenseId).HasColumnName("MedicalLicense_ID");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.Clinic)
-                    .WithMany(p => p.Doctors)
-                    .HasForeignKey(d => d.ClinicId)
-                    .HasConstraintName("FK_Doctor_Clinic");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Doctors)
@@ -516,8 +520,10 @@ namespace DrReport.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Gender)
+                    .IsRequired()
                     .HasMaxLength(1)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('')");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 

@@ -1,4 +1,4 @@
-﻿
+﻿@model DrReport.Models.DiseaseSymptom
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="./style/bootstrap.css">
     <link rel="stylesheet" href="~/Styles/Symptoms/style/steps.css">
     <link rel="stylesheet" href="~/Styles/Symptoms/style/inform.css">
+
 </head>
+
 <body>
     <div class="stepper-container">
         <div class="steps">
@@ -121,8 +123,37 @@
                 <div class="data">
                     <h3>Add symptoms</h3>
                     <p>Please use the search. Add as many symptoms as you can for the<br>most accurate results.</p>
-                    <input type="text" name="search" placeholder="Search, e.g headache" oninput="validateSymptoms()">
-                    <textarea placeholder="Please try to add more than one symptom." oninput="validateSymptoms()"></textarea>
+                    @*<input type="text" name="search" placeholder="Search, e.g headache" oninput="validateSymptoms()">*@
+                    <!--**************************************************************-->
+                    <div>
+                        <select class="myselect" style="width:500px" multiple>
+                        </select>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $(".myselect").select2({
+                                placeholder: "Symptom",
+                                theme: "classic",
+                                ajax: {
+                                    url: "/InformSymptoms/GetSymptomList",  /*controller action*/
+                                    dataType: "json",
+                                    data: function (params) {
+                                        return {
+                                            searchTerm: params.term
+                                        };
+                                    },
+                                    processResults: function (data, params) {
+                                        return {
+                                            results: data
+                                        };
+                                    }
+                                }
+                            });
+                        });
+
+                    </script>
+                    <!--**************************************************************-->
+                    @*<textarea placeholder="Please try to add more than one symptom." oninput="validateSymptoms()"></textarea>*@
                 </div>
             </div>
             <!-- step six -->

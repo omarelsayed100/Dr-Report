@@ -9,7 +9,6 @@ namespace DrReport.Models
     {
         public Clinic()
         {
-            Doctors = new HashSet<Doctor>();
             Greserves = new HashSet<Greserve>();
             Reserves = new HashSet<Reserve>();
         }
@@ -18,10 +17,12 @@ namespace DrReport.Models
         public string Name { get; set; }
         public string Telephone { get; set; }
         public string Mail { get; set; }
-        public DateTime ApOpentime { get; set; }
-        public DateTime ApClosetime { get; set; }
+        public DateTime? ApOpentime { get; set; }
+        public DateTime? ApClosetime { get; set; }
+        public string Location { get; set; }
+        public int? DoctorId { get; set; }
 
-        public virtual ICollection<Doctor> Doctors { get; set; }
+        public virtual Doctor Doctor { get; set; }
         public virtual ICollection<Greserve> Greserves { get; set; }
         public virtual ICollection<Reserve> Reserves { get; set; }
     }

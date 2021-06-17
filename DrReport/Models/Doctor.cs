@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -11,6 +10,7 @@ namespace DrReport.Models
         public Doctor()
         {
             Candidates = new HashSet<Candidate>();
+            Clinics = new HashSet<Clinic>();
             DiagnosisResults = new HashSet<DiagnosisResult>();
             DiagnosisTests = new HashSet<DiagnosisTest>();
             DoctorCrudCdoctors = new HashSet<DoctorCrudCdoctor>();
@@ -20,11 +20,11 @@ namespace DrReport.Models
 
         public int Id { get; set; }
         public int? MedicalLicenseId { get; set; }
-        public int? ClinicId { get; set; }
         public int UserId { get; set; }
-        public virtual Clinic Clinic { get; set; }
+
         public virtual User User { get; set; }
         public virtual ICollection<Candidate> Candidates { get; set; }
+        public virtual ICollection<Clinic> Clinics { get; set; }
         public virtual ICollection<DiagnosisResult> DiagnosisResults { get; set; }
         public virtual ICollection<DiagnosisTest> DiagnosisTests { get; set; }
         public virtual ICollection<DoctorCrudCdoctor> DoctorCrudCdoctors { get; set; }
