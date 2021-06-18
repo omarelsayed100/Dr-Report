@@ -126,6 +126,7 @@
                     @*<input type="text" name="search" placeholder="Search, e.g headache" oninput="validateSymptoms()">*@
                     <!--**************************************************************-->
                     <div>
+                        <input type="hidden" id="txtValue" />
                         <select class="myselect" style="width:500px" multiple>
                         </select>
                     </div>
@@ -149,11 +150,22 @@
                                     }
                                 }
                             });
+                            $(".myselect").on("change", function () {
+                                var Id = $(this).val();
+                                $("#txtValue").val(Id);
+                                var temp = $("#txtValue").val();
+                                $.ajax({
+                                    type: "post",
+                                    dataType: "json",
+                                    url: "/InformSymptoms/GetSelected?data=" + temp,
+                                })
+
+                            });
                         });
 
                     </script>
-                    <!--**************************************************************-->
                     @*<textarea placeholder="Please try to add more than one symptom." oninput="validateSymptoms()"></textarea>*@
+                    <!--**************************************************************-->
                 </div>
             </div>
             <!-- step six -->

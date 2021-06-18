@@ -37,6 +37,12 @@ namespace DrReport.Controllers
             });
             return Json(modifiedData);
         }
+        [HttpPost]
+        public JsonResult GetSelected(string data)
+        {
+            var symptomsIds = data;
+            return Json(symptomsIds);
+        }
 
 
         /*
