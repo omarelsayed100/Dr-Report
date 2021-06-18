@@ -127,14 +127,14 @@
                     <!--**************************************************************-->
                     <div>
                         <input type="hidden" id="txtValue" />
-                        <select class="myselect" style="width:500px" multiple>
+                        <select class="myselect form-control" style="width:500px" multiple>
                         </select>
                     </div>
                     <script>
                         $(document).ready(function () {
+
                             $(".myselect").select2({
-                                placeholder: "Symptom",
-                                theme: "classic",
+                                placeholder: 'Add Symptoms , e.g headache',
                                 ajax: {
                                     url: "/InformSymptoms/GetSymptomList",  /*controller action*/
                                     dataType: "json",
@@ -149,7 +149,9 @@
                                         };
                                     }
                                 }
+                               
                             });
+                            //$('.select2-search__field').css('width', '100%');
                             $(".myselect").on("change", function () {
                                 var Id = $(this).val();
                                 $("#txtValue").val(Id);
