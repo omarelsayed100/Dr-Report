@@ -120,11 +120,12 @@ function validatePatientDate() {
 }
 
 function validateSymptoms() {
-    if ($("input[name='search']").val() && $("textarea").val()) {
+    if ($('#txtValue').val().length> 2 /*&& $("textarea").val()*/) {
         $('#next').attr('disabled', false);
     } else {
         $('#next').attr('disabled', true);
     }
+
 }
 
 function validateQuestions () {

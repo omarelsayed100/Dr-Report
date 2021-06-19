@@ -126,7 +126,7 @@
                     @*<input type="text" name="search" placeholder="Search, e.g headache" oninput="validateSymptoms()">*@
                     <!--**************************************************************-->
                     <div>
-                        <input type="hidden" id="txtValue" />
+                        <input type="hidden" id="txtValue" oninput="validateSymptoms()" />
                         <select class="myselect form-control" style="width:500px" multiple>
                         </select>
                     </div>
@@ -203,7 +203,7 @@
                     <h3>Consult a doctor</h3>
                     <h5>Your symptoms may require medical evaluation. Schedule an appointment<br>with your doctor. If your symptoms get worse, see a doctor immediately.</h5>
                     <h3>Potential disease</h3>
-                    <p>"Disease name"</p>
+                    <p>@ViewBag.sympid</p>
                     <h3>Recommended diagnosis test</h3>
                     <p>"Diagnosis test name"</p>
                 </div>
