@@ -26,9 +26,11 @@ namespace DrReport.Controllers
         public RedirectToActionResult Signin(User user)
         {
             var checkUser = _context.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
-            // , checkUser.Email
             if (checkUser != null)
             {
+                // important global variable that could be used in every countroller
+                TempData["accountid"] = checkUser.UserId;
+                //***************************************
                 if (checkUser.UserTypeId==1) 
                 {
                     TempData["accountname"] = checkUser.Fname + " " + checkUser.Lname;

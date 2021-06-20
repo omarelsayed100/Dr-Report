@@ -19,7 +19,10 @@ namespace DrReport.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.sympid = TempData["sympid"];
+            ViewBag.diagnosistest = TempData["diagnosistest"];
+            ViewBag.precaution = TempData["precaution"];
+            ViewBag.finaldisease_name = TempData["finaldisease_name"];
+
             return View();
         }
         public JsonResult GetSymptomList(string searchTerm)
@@ -66,14 +69,24 @@ namespace DrReport.Controllers
                 .Select(grp => grp.Key).First();
                 //outputs
                 var finaldisease = _context.Diseases.FirstOrDefault(d => d.Id==most);
-                var final = finaldisease.Name;
+                var finaldisease_name = finaldisease.Name;
                 var precaution = finaldisease.Precaution;
-                var diagnosistestid = _context.DiseaseRelateDtests.FirstOrDefault(s => s.DiseaseId==finaldisease.Id).DtestId;
-                var diagnosistest = _context.DiagnosisTests.FirstOrDefault(d => d.Id == diagnosistestid).Name;
+                try
+                {
+
+                    var diagnosistestObj = _context.DiseaseRelateDtests.FirstOrDefault(s => s.DiseaseId == finaldisease.Id);
+                    string diagnosistest = _context.DiagnosisTests.FirstOrDefault(d => d.Id == diagnosistestObj.DtestId).Name;
+                    TempData["diagnosistest"] = diagnosistest.ToString();
+                }
+                catch 
+                {
+                }
                 double accuarcy = ((double)CountOccurenceOfValue(diseaseIds, (int) most)/ (double)diseaseIds.Count);
-                TempData["sympid"] = symptomsIds.First().ToString();
+                //
+                
+                TempData["precaution"] = precaution.ToString();
+                TempData["finaldisease_name"] = finaldisease_name.ToString();
             }
-            
             return Json(0);
         }
         public  int CountOccurenceOfValue(List<int?> list, int valueToFind)
@@ -86,38 +99,6 @@ namespace DrReport.Controllers
 
         //    return View();
         //}
-
-        /*
-                input :
-                list S=[s1,s2,s3,s4]
-                --------------------------------
-        algorithm#1  Using LINQ
-                var D=_context.disease(s=>s.symptoms==S[0])
-         ///////////////////////////////////////////////////
-        algorithm#2     طريقة الحذف 
-
-
-            iteration1:
-                d1   s1
-                d2   s1
-                d3   s1
-
-            iteration2:
-                look for s2
-                Disease symptoms
-                d1      s1 s2 s3
-                d2      s1 s2 s3
-
-            iteration3:
-                d1   s1 s2 s3 s4
-                ------------------------------------
-
-            output:
-                dtest <=>d1    mapping
-                precaution <=> d1  mapping
-                --------------------------------
-
-        */
 
     }
 }

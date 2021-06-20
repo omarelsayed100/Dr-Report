@@ -120,7 +120,7 @@ function validatePatientDate() {
 }
 
 function validateSymptoms() {
-    if ($('#txtValue').val().length> 2 /*&& $("textarea").val()*/) {
+    if ($("textarea").val()) {
         $('#next').attr('disabled', false);
     } else {
         $('#next').attr('disabled', true);

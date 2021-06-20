@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "AddIndex";
+    Layout = "~/Views/Shared/_Laytout2.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <link href="~/Styles/ControlTest/addstyle.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="form">
+        <div class="container">
+            <div class="title">
+                <p> Add New Test</p>
+            </div>
+            <div class="form-label-group">
+                <label>Test Name:</label>
+                <input type="text" class="form-control" placeholder="" required autofocus>
+
+            </div>
+            <div class="form-label-group">
+                <label for="testType">Test Type:</label>
+                <input id="testType" type="text" class="form-control" placeholder="" required autofocus>
+            </div>
+            <div class="form-label-group">
+                <label for="testUnit">Test Unit:</label>
+                <input id="testUnit" type="text" class="form-control" placeholder="" required autofocus>
+            </div>
+            <div class="form-label-group">
+                <label for="testStart">Test Start Range:</label>
+                <input id="testStart" type="text" class="form-control" placeholder="" required autofocus>
+            </div>
+            <div class="form-label-group">
+                <label for="testEnd">Test End Range:</label>
+                <input id="testEnd" type="text" class="form-control" placeholder="" required autofocus>
+            </div>
+            <div class="form-label-group">
+                <label for="Patient">Patient Type:</label>
+                <input id="Patient" type="text" class="form-control" placeholder="" required autofocus>
+            </div>
+            <div class="buttons-container">
+                <button type="button" class="btn_back">back</button>
+                <button type="button" class="btn_add">Add</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

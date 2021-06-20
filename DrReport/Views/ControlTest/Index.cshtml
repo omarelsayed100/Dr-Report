@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Laytout2.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <link href="~/Styles/ControlTest/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="form">
+        <form action="/ControlTest/Addindex">
+            <div class="add">
+                <button type="submit" class="btn_add">Add New Test</button>
+            </div>
+        </form>
+        <div class="text">
+            <h3>OR</h3>
+        </div>
+        <form action="/ControlTest/Updateindex">
+            <div class="update">
+                <button type="submit" class="btn_update" href="/ControlTest/Addindex">Update Existing Test</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

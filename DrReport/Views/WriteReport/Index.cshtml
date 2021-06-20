@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Laytout2.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <link href="~/Styles/Write Report/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="form">
+        <div class="text">
+            <p>Select Patient</p>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter Patient Name">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    Search
+                </button>
+            </div>
+        </div>
+        <div class="col-lg-10" id="confirm">
+            <button id="confirm" type="button" class="btn_confirm">Write Report</button>
+        </div>
+    </div>
+</body>
+</html>

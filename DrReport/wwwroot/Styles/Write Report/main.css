@@ -1,0 +1,34 @@
+
+  .dropdown-item{
+    color: #2D82B5;
+    font-family:'Roboto Slab', serif;
+    font-size:14px
+} 
+    /*slider*/
+  .carousel-item {
+    height: 640px;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    position: relative;
+    background-size: cover;
+    
+  }
+  .container_{
+    text-align: center;
+    top: 40%;
+    right: 25%;
+    position: relative;
+  }
+.header_carousel{
+      font-family:'Roboto Slab', serif;
+      font-size: 62px;
+      color: #221e41;
+}
+.body_carousel{
+    padding-top: 10px;
+    font-family:'Roboto Slab', serif;
+    font-size: 22px;
+    color:#757384;
+}
+
+  
