@@ -11,6 +11,7 @@
     <title>Medical Diagnosis</title>
     <link rel="stylesheet" href="~/Styles/Symptoms/style/steps.css">
     <link rel="stylesheet" href="~/Styles/Symptoms/style/inform.css" />
+    <link rel="stylesheet" href="~/Styles/Main/main.css">
 </head>
 
 <body>
@@ -52,7 +53,7 @@
                         - This will help you know the diagnosis test that fit you best <br>
                         - Then you have the option ti make appointment or not <br>
                     </p>
-                  
+
                     <div class="input">
                         <input type="checkbox" name="terms" onchange="validateTerms()">
                         <span>I read and accept Terms of Service and Privacy Policy.</span>
@@ -118,17 +119,15 @@
                 <div class="data">
                     <h3>Add symptoms</h3>
                     <p>Please use the search. Add as many symptoms as you can for the<br>most accurate results.</p>
-
-                        <input type="hidden" name="search" id="txtValue" />
-                        <select class="myselect form-control" style="width:500px" multiple>
-                        </select>
-
+                    <input type="hidden" id="txtValue" oninput="validateSymptoms()" />
+                    <select class="myselect form-control" style="width:500px" multiple>
+                    </select>
                 </div>
                 <script>
                     $(document).ready(function () {
 
                         $(".myselect").select2({
-                            placeholder: 'Add Symptoms , e.g headache',
+                            placeholder: 'Add Minimum 3 Symptoms, e.g headache',
                             ajax: {
                                 url: "/InformSymptoms/GetSymptomList",  /*controller action*/
                                 dataType: "json",
@@ -145,8 +144,12 @@
                             }
 
                         });
-                        //$('.select2-search__field').css('width', '100%');
                         $(".myselect").on("change", function () {
+                            if ($('#txtValue').val().length >= 3) {
+                                $('#next').attr('disabled', false);
+                            } else {
+                                $('#next').attr('disabled', true);
+                            }
                             var Id = $(this).val();
                             $("#txtValue").val(Id);
                             var temp = $("#txtValue").val();
@@ -193,29 +196,30 @@
                     <h3>Consult a doctor</h3>
                     <h5>Your symptoms may require medical evaluation. Schedule an appointment<br>with your doctor. If your symptoms get worse, see a doctor immediately.</h5>
                     <h3>Potential disease</h3>
-                    <p>@ViewBag.finaldisease_name</p>
+                    <p style="color:darkslategrey">@ViewBag.finaldisease_name</p>
                     <h3>Recommended diagnosis test</h3>
-                    <p>@ViewBag.diagnosistest</p>     
+                    <p style="color:darkslategrey">@ViewBag.diagnosistest</p>
                     <h3>Precautions</h3>
-                    <p>@ViewBag.precaution</p>
+                    <p style="color:darkslategrey">@ViewBag.precaution</p>
 
                 </div>
             </div>
             <!-- buttons -->
             <div class="buttons-container">
                 <div class="back" onclick="backStep()">
-                    <img src="./images/back.png" alt="">
+                    <img src="~/Styles/Symptoms/images/back.png" alt="">
                     <span>Back</span>
                 </div>
                 <div class="end">
                     <button id="next" class="button" onclick="getNextStep()">Next</button>
-                    <button id="finish" class="btn btn-primary">Make Appointment</button>
+                    <form action="/MakeAppointment/index">
+                        <button id="finish" class="btn btn-primary">Make Appointment</button>
+                    </form>
                 </div>
             </div>
         </div> <!-- content div end -->
 
     </div> <!-- steps container end -->
-    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/Styles/Symptoms/script/script.js"></script>
 </body>
 </html>

@@ -120,13 +120,13 @@ function validatePatientDate() {
 }
 
 function validateSymptoms() {
-    if ($("textarea").val()) {
+    if ($('#txtValue').val().length > 2) {
         $('#next').attr('disabled', false);
     } else {
         $('#next').attr('disabled', true);
     }
-
 }
+
 
 function validateQuestions () {
     if ($(".step-six input").is(':checked')) {
