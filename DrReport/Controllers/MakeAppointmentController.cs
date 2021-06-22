@@ -10,10 +10,12 @@ namespace DrReport.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.accountname = TempAccount.AccountName;
             return View();
         }
         public IActionResult FillIndex()
         {
+            ViewBag.accountname = TempAccount.AccountName;
             return View();
         }
     }

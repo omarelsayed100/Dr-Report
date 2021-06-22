@@ -11,7 +11,7 @@ namespace DrReport.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.accountname = TempData["accountname"];
+            ViewBag.accountname = TempAccount.AccountName;
             return View();
         }
     }

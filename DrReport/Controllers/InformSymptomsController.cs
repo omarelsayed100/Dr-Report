@@ -19,6 +19,7 @@ namespace DrReport.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.accountname = TempAccount.AccountName;
             ViewBag.diagnosistest = TempData["diagnosistest"];
             ViewBag.precaution = TempData["precaution"];
             ViewBag.finaldisease_name = TempData["finaldisease_name"];

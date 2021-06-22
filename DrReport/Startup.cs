@@ -53,7 +53,7 @@ namespace DrReport
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=SignIn}/{action=Index}/{id?}");
             });
         }
     }

@@ -33,13 +33,14 @@ namespace DrReport.Controllers
                 //***************************************
                 if (checkUser.UserTypeId==1) 
                 {
-                    TempData["accountname"] = checkUser.Fname + " " + checkUser.Lname;
+
+                    TempAccount.AccountName = checkUser.Fname + " " + checkUser.Lname;
                     return RedirectToAction("Index", "PatientHome");
 
                 }
                 else if (checkUser.UserTypeId== 2)
                 {
-                    TempData["accountname"] = "DR. "+checkUser.Fname + " " + checkUser.Lname;
+                    TempAccount.AccountName = "DR. "+checkUser.Fname + " " + checkUser.Lname;
                     return RedirectToAction("Index", "DoctorHome");
                 }
             }
