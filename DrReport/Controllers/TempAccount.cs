@@ -8,6 +8,5 @@ namespace DrReport.Controllers
     public class TempAccount
     {
         public static string AccountName { get; set; }
-
     }
 }

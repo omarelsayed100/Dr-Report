@@ -127,7 +127,6 @@ function validateSymptoms() {
     }
 }
 
-
 function validateQuestions () {
     if ($(".step-six input").is(':checked')) {
         $('#next').attr('disabled', false);

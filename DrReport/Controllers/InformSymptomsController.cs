@@ -11,7 +11,6 @@ namespace DrReport.Controllers
     public class InformSymptomsController : Controller
     {
         private readonly MedicalDBContext _context;
-
         public InformSymptomsController(MedicalDBContext context)
         {
             _context = context;
@@ -28,14 +27,14 @@ namespace DrReport.Controllers
         }
         public JsonResult GetSymptomList(string searchTerm)
         {
-            var SymptomList = _context.DiseaseSymptoms.ToList();
+            var symptomList = _context.DiseaseSymptoms.ToList();
 
             if (searchTerm != null)
             {
-                SymptomList = _context.DiseaseSymptoms.Where(x => x.Symptom.Contains(searchTerm)).ToList();
+                symptomList = _context.DiseaseSymptoms.Where(x => x.Symptom.Contains(searchTerm)).ToList();
             }
 
-            var modifiedData = SymptomList.Select(x => new
+            var modifiedData = symptomList.Select(x => new
             {
                 id = x.Id,
                 text = x.Symptom
@@ -44,53 +43,60 @@ namespace DrReport.Controllers
         }
         //Get selected symptomsIds from select symptoms list
         [HttpPost]
-        public JsonResult GetSelected(string data)
+        public JsonResult GetSelectedSymptoms(string data)
         {
             if (data!=null)
             {
-                List<int> symptomsIds = data.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+                // Splitting the input data
+                List<int> symptomIds = data.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
 
-                //transform the symptom ids into distinict symptom names to prevent Repetition
+                // Transform the symptom ids into distinict symptom names to prevent Repetition
                 List<string> symptomsnames=new List<string>();
-                foreach (var item in symptomsIds)
+                foreach (var item in symptomIds)
                 {
-                    var x = _context.DiseaseSymptoms.Where(d => d.Id == item).Select(s=>s.Symptom).FirstOrDefault();
-                    symptomsnames.Add(x);
+                    var selectedSymptoms = _context.DiseaseSymptoms.Where(d => d.Id == item).Select(s=>s.Symptom).FirstOrDefault();
+                    symptomsnames.Add(selectedSymptoms);
                 }
+                //Selecting the distinict symptoms 
                 var distinctsymptoms = symptomsnames.Distinct().ToList();
 
                 // Algorithm
                 List<int?> diseaseIds = new List<int?>();
                 foreach (var item in distinctsymptoms)
                 {
-                    var y = _context.DiseaseSymptoms.Where(s => s.Symptom == item).Select(d=>d.DiseaseId).ToList();
-                    diseaseIds.AddRange(y);
+                    var selectedDiseases = _context.DiseaseSymptoms.Where(s => s.Symptom == item).Select(d=>d.DiseaseId).ToList();
+                    diseaseIds.AddRange(selectedDiseases);
                 }
-                var most = diseaseIds.GroupBy(i => i).OrderByDescending(grp => grp.Count())
+                var mostFrequentDisease = diseaseIds.GroupBy(i => i).OrderByDescending(grp => grp.Count())
                 .Select(grp => grp.Key).First();
-                //outputs
-                var finaldisease = _context.Diseases.FirstOrDefault(d => d.Id==most);
-                var finaldisease_name = finaldisease.Name;
-                var precaution = finaldisease.Precaution;
+
+                //Outputs for disease & its precautions
+                var finalDiseaseObj = _context.Diseases.FirstOrDefault(d => d.Id== mostFrequentDisease);
+                var finalDiseaseName = finalDiseaseObj.Name;
+                var precaution = finalDiseaseObj.Precaution;
+                TempData["precaution"] = precaution.ToString();
+                TempData["finaldisease_name"] = finalDiseaseName.ToString();
+
+                //Outputs for diagnosis test
+                var diagnosisTestObj = _context.DiseaseRelateDtests.FirstOrDefault(s => s.DiseaseId == finalDiseaseObj.Id);
+                string diagnosisTest;
                 try
                 {
-
-                    var diagnosistestObj = _context.DiseaseRelateDtests.FirstOrDefault(s => s.DiseaseId == finaldisease.Id);
-                    string diagnosistest = _context.DiagnosisTests.FirstOrDefault(d => d.Id == diagnosistestObj.DtestId).Name;
-                    TempData["diagnosistest"] = diagnosistest.ToString();
+                    diagnosisTest = _context.DiagnosisTests.FirstOrDefault(d => d.Id == diagnosisTestObj.DtestId).Name;
                 }
-                catch 
+                catch (Exception)
                 {
+                    diagnosisTest = "No Diagnosis Test Attached To This Disease";
                 }
-                double accuarcy = ((double)CountOccurenceOfValue(diseaseIds, (int) most)/ (double)diseaseIds.Count);
-                //
-                
-                TempData["precaution"] = precaution.ToString();
-                TempData["finaldisease_name"] = finaldisease_name.ToString();
+                TempData["diagnosistest"] = diagnosisTest.ToString();
+
+                //Calcuating the accuracy
+                double accuarcy = ((double)CountOccurenceOfValue(diseaseIds, (int)mostFrequentDisease) / (double)diseaseIds.Count);
             }
             return Json(0);
         }
-        public  int CountOccurenceOfValue(List<int?> list, int valueToFind)
+        //Number of occurence of a specific value in a list
+        public int CountOccurenceOfValue(List<int?> list, int valueToFind)
         {
             return ((from temp in list where temp.Equals(valueToFind) select temp).Count());
         }

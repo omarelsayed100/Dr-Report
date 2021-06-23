@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -14,6 +15,7 @@ namespace DrReport.Models
         }
 
         public int Id { get; set; }
+        [Required(ErrorMessage = "*")]
         public string Name { get; set; }
         public string Telephone { get; set; }
         public string Mail { get; set; }
