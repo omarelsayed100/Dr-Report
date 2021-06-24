@@ -25,16 +25,24 @@ namespace DrReport.Controllers
 
             return View();
         }
+
         public JsonResult GetSymptomList(string searchTerm)
         {
             var symptomList = _context.DiseaseSymptoms.ToList();
 
+            //Selecting the distinict symptoms 
+            var distinictSymptoms = symptomList.GroupBy(s => s.Symptom).Select(s => s.First()).ToList();
+            
+            var selectedSymptoms =new List<DiseaseSymptom>();
             if (searchTerm != null)
             {
-                symptomList = _context.DiseaseSymptoms.Where(x => x.Symptom.Contains(searchTerm)).ToList();
+               selectedSymptoms = distinictSymptoms.Where(x => x.Symptom.Contains(searchTerm)).ToList();
             }
-
-            var modifiedData = symptomList.Select(x => new
+            else
+            {
+                selectedSymptoms = distinictSymptoms;
+            }
+            var modifiedData = selectedSymptoms.Select(x => new
             {
                 id = x.Id,
                 text = x.Symptom
@@ -57,12 +65,10 @@ namespace DrReport.Controllers
                     var selectedSymptoms = _context.DiseaseSymptoms.Where(d => d.Id == item).Select(s=>s.Symptom).FirstOrDefault();
                     symptomsnames.Add(selectedSymptoms);
                 }
-                //Selecting the distinict symptoms 
-                var distinctsymptoms = symptomsnames.Distinct().ToList();
-
+                
                 // Algorithm
                 List<int?> diseaseIds = new List<int?>();
-                foreach (var item in distinctsymptoms)
+                foreach (var item in symptomsnames)
                 {
                     var selectedDiseases = _context.DiseaseSymptoms.Where(s => s.Symptom == item).Select(d=>d.DiseaseId).ToList();
                     diseaseIds.AddRange(selectedDiseases);
@@ -95,6 +101,7 @@ namespace DrReport.Controllers
             }
             return Json(0);
         }
+     
         //Number of occurence of a specific value in a list
         public int CountOccurenceOfValue(List<int?> list, int valueToFind)
         {
