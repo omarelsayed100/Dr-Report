@@ -100,12 +100,7 @@ namespace DrReport.Controllers
         {
             return ((from temp in list where temp.Equals(valueToFind) select temp).Count());
         }
-        //public ActionResult SymptomResult()
-        //{
 
-
-        //    return View();
-        //}
 
     }
 }
