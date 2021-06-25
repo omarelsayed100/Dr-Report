@@ -17,16 +17,20 @@ namespace DrReport.Controllers
         public IActionResult Index(string search)
         {
             ViewBag.accountname = TempAccount.AccountName;
+            if (search==null)
+            {
+                search = "";
+            }
+            var selectedClinics = _context.Clinics.Where(c => c.Name.Contains(search));
+            var clinicDoctors = selectedClinics.Select(d => d.Doctor);
             
-            var clinics = _context.Clinics.Where(c => c.Name.Contains(search));
-            var clinicDoctors = _context.Clinics.Select(d => d.Doctor);
             var clinicDoctorNames = from d in clinicDoctors
                 join u in _context.Users
                 on d.UserId equals u.UserId
                 select ( "DR. "+u.Fname+" "+u.Lname);
    
             ViewBag.doctors = clinicDoctorNames.ToArray();
-            return View(_context.Clinics);
+            return View(selectedClinics);
         }
         public ActionResult FillIndex(int id)
         {
