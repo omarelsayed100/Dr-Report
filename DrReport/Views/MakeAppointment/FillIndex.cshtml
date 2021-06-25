@@ -1,4 +1,5 @@
-﻿
+﻿@model DrReport.Models.Reserve
+
 @{
     ViewData["Title"] = "FillIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,27 +15,46 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <!--Css Link-->
     <link href="~/Styles/FillAppointment/style.css" rel="stylesheet" />
+    <link href="~/Styles/Main/main.css" rel="stylesheet" />
 </head>
 <body>
     <div class="content">
         <div class="form">
             <div class="data">
-                <h3>Fill Appointment Data</h3>
-                <input type="text" name="search" placeholder="Choose Diagnosis Type" oninput="validateSymptoms()">
-                <input type="date" id="Appointment" name="Appointment">
-                <div class="check">
-                    <span>Allow Traffic regulator.</span>
-                    <input type="checkbox" name="terms" onchange="validateTerms()">
-                </div>
-                <div class="col-lg-10">
-                    <button id="confirm" type="button" class="btn_confirm">Confirm</button>
-                </div>
+                <h3>
+                    Fill Appointment Data
+                </h3>
+                <form asp-action="CreateAppointment" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="DtestId" class="control-label"></label>
+                        <input asp-for="DtestId" class="form-control">
+                    </div>
 
+                    <div class="form-group">
+                        <label asp-for="ReservationDate" class="control-label"></label>
+                        <input asp-for="ReservationDate" class="form-control" />
+                        <span asp-validation-for="ReservationDate" class="text-danger"></span>
+                    </div>
+                    <div class="check">
+                        <span>Allow Traffic regulator.</span>
+                        <input type="checkbox" name="terms" onchange="validateTerms()">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                    
+                </form>
             </div>
+            @*<div>
+                <a asp-action="Index">Back to List</a>
+            </div>*@
         </div>
     </div>
     <script src="~/Styles/FillAppointment/script.js"></script>
 </body>
 </html>
+
+
 
 

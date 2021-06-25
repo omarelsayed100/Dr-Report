@@ -31,8 +31,9 @@ namespace DrReport.Controllers
             var symptomList = _context.DiseaseSymptoms.ToList();
 
             //Selecting the distinict symptoms 
-            var distinictSymptoms = symptomList.GroupBy(s => s.Symptom).Select(s => s.First()).ToList();
-            
+            var distinictSymptoms = symptomList.GroupBy(s => s.Symptom).Select(s => s.First())
+                .OrderBy(o => o.Symptom).ToList();
+           
             var selectedSymptoms =new List<DiseaseSymptom>();
             if (searchTerm != null)
             {

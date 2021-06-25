@@ -23,7 +23,6 @@ namespace DrReport.Controllers
         [HttpPost]
         public ActionResult SignUp(Patient patient)
         {
-
             var check = _context.Users.Select(u => u.Email).Contains(patient.User.Email);
 
             if (ModelState.IsValid && check == false)
