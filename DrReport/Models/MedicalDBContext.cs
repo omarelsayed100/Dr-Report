@@ -550,6 +550,8 @@ namespace DrReport.Models
                     .HasColumnType("date")
                     .HasColumnName("Request_Date");
 
+                entity.Property(e => e.DoctorId).HasColumnName("Doctor_ID");
+
                 entity.Property(e => e.DtestId).HasColumnName("Dtest_ID");
 
                 entity.Property(e => e.PatientId).HasColumnName("Patient_ID");
@@ -560,10 +562,11 @@ namespace DrReport.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Reserve_Clinic");
 
-                entity.HasOne(d => d.Dtest)
+                entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.Reserves)
-                    .HasForeignKey(d => d.DtestId)
-                    .HasConstraintName("FK_Reserve_Diagnosis Result");
+                    .HasForeignKey(d => d.DoctorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Reserve_Doctor");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Reserves)

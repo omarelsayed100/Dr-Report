@@ -14,7 +14,6 @@ namespace DrReport.Models
             DtestDresults = new HashSet<DtestDresult>();
             GdtestDresults = new HashSet<GdtestDresult>();
             Gives = new HashSet<Give>();
-            Reserves = new HashSet<Reserve>();
         }
 
         public int Id { get; set; }
@@ -29,6 +28,5 @@ namespace DrReport.Models
         public virtual ICollection<DtestDresult> DtestDresults { get; set; }
         public virtual ICollection<GdtestDresult> GdtestDresults { get; set; }
         public virtual ICollection<Give> Gives { get; set; }
-        public virtual ICollection<Reserve> Reserves { get; set; }
     }
 }

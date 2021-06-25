@@ -16,6 +16,7 @@ namespace DrReport.Models
             DoctorCrudCdoctors = new HashSet<DoctorCrudCdoctor>();
             GeneralDiagnosisTests = new HashSet<GeneralDiagnosisTest>();
             Gives = new HashSet<Give>();
+            Reserves = new HashSet<Reserve>();
         }
 
         public int Id { get; set; }
@@ -30,5 +31,6 @@ namespace DrReport.Models
         public virtual ICollection<DoctorCrudCdoctor> DoctorCrudCdoctors { get; set; }
         public virtual ICollection<GeneralDiagnosisTest> GeneralDiagnosisTests { get; set; }
         public virtual ICollection<Give> Gives { get; set; }
+        public virtual ICollection<Reserve> Reserves { get; set; }
     }
 }
