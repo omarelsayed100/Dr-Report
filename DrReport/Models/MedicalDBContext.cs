@@ -322,7 +322,9 @@ namespace DrReport.Models
             {
                 entity.ToTable("Disease Symptoms");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
 
                 entity.Property(e => e.DiseaseId).HasColumnName("Disease_ID");
 
@@ -536,25 +538,34 @@ namespace DrReport.Models
 
             modelBuilder.Entity<Reserve>(entity =>
             {
-                entity.HasKey(e => new { e.ClinicId, e.ReservationDate, e.RequestDate });
+                entity.HasKey(e => new { e.ClinicId, e.ReservationDate, e.RequestDate })
+                    .HasName("PK_Reserve_1");
 
                 entity.ToTable("Reserve");
 
                 entity.Property(e => e.ClinicId).HasColumnName("Clinic_ID");
 
                 entity.Property(e => e.ReservationDate)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("Reservation_Date");
 
                 entity.Property(e => e.RequestDate)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("Request_Date");
 
                 entity.Property(e => e.DoctorId).HasColumnName("Doctor_ID");
 
-                entity.Property(e => e.DtestId).HasColumnName("Dtest_ID");
+                entity.Property(e => e.DtestName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Dtest_Name");
 
                 entity.Property(e => e.PatientId).HasColumnName("Patient_ID");
+
+                entity.Property(e => e.PotentialDisease)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Potential_Disease");
 
                 entity.HasOne(d => d.Clinic)
                     .WithMany(p => p.Reserves)
@@ -571,6 +582,7 @@ namespace DrReport.Models
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Reserves)
                     .HasForeignKey(d => d.PatientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Reserve_Patient");
             });
 

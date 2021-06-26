@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DrReport.Models.Reserve>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Laytout2.cshtml";
@@ -13,99 +13,41 @@
     <link href="~/Styles/Write Report/main.css" rel="stylesheet" />
 </head>
 <body>
+    
     <div class="container" style="margin-top:30px">
         <table class="table">
             <thead class="thead-light">
                 <tr style="text-align: center;">
-                    <th scope="col">Doctor Name</th>
+                    <th scope="col">Patient Name</th>
                     <th scope="col">Age</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Diagnosis Test </th>
                     <th scope="col">Possible Disease </th>
-                    <th scope="col">Make Appointment</th>
+                    <th scope="col">Reports</th>
                 </tr>
             </thead>
             <tbody>
-                <tr style="text-align: center;">
-                    <td scope="col">Mahmoud Said</td>
-                    <td>20</td>
-                    <td>Male </td>
-                    <td>Hematology</td>
-                    <td>Anemia</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Reham Ahmed</td>
-                    <td>25</td>
-                    <td>Female</td>
-                    <td>CRB</td>
-                    <td>Cardaic Arrest</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Manar Abd El-Aziz</td>
-                    <td>18</td>
-                    <td>Female</td>
-                    <td>Urine Examination</td>
-                    <td>Urinary Tract Infections</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Ali Tarek </td>
-                    <td>30</td>
-                    <td>Male</td>
-                    <td>Fasting Blood Glucose</td>
-                    <td>Diabetes</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Doina Alaa </td>
-                    <td>23</td>
-                    <td>Female</td>
-                    <td>General Blood Picture</td>
-                    <td>None</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Mohamed Abd Alla</td>
-                    <td>22</td>
-                    <td>Male</td>
-                    <td>Urine Examination</td>
-                    <td>Urinary Tract Infections</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Yousef Samir</td>
-                    <td>36</td>
-                    <td>Male</td>
-                    <td>CRB</td>
-                    <td>Cardaic Arrest</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Ebrahim Mahmoud</td>
-                    <td>19</td>
-                    <td>Male</td>
-                    <td>Fasting Blood Glucose</td>
-                    <td>None</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Sara Gamal </td>
-                    <td> 33</td>
-                    <td>Female</td>
-                    <td>Hematology</td>
-                    <td>Anemia</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
-                <tr style="text-align: center;">
-                    <td scope="col">Nada Khaled</td>
-                    <td>16</td>
-                    <td>Female</td>
-                    <td>CRB</td>
-                    <td>New Covid-19</td>
-                    <td class="btn btn-primary btn-sm btn-inline-center">Write Report</td>
-                </tr>
+                @if (Model.Count() != 0)
+                {
+                    foreach (var item in Model)
+                    {
+
+                        <tr style="text-align: center;">
+                            <td scope="col">@item.PatientId</td>
+                            <td>22</td>
+                            <td>Male </td>
+                            <td>@item.DtestName</td>
+                            <td>@item.PotentialDisease</td>
+                            <td> <a href="/WriteReport/ReportIndex" class="btn btn-primary btn-sm btn-inline-center">Write Report</a></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td><h5 class="text-danger">No Reservation Found</h5></td></tr>
+                }
+
+
             </tbody>
         </table>
     </div>

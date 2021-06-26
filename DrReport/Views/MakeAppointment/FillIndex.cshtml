@@ -14,49 +14,59 @@
     <!--bootstrap css link-->
     <!--Css Link-->
     <link href="~/Styles/FillAppointment/style.css" rel="stylesheet" />
-<link href="~/Styles/Main/main.css" rel="stylesheet" />
+    <link href="~/Styles/Main/main.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="content">
-        <div class="form">
-            <div>
-                <h3>
-                    Fill Appointment Data 
-                </h3>
+    <div class="container mt-5 mb-5 d-flex justify-content-center">
+        <div class="card px-1 py-4">
+            <div class="card-body">
+                <h3 class="card-title mb-3">Fill Appointment Data</h3>
+
                 <form asp-action="CreateAppointment" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label class="control-label h4">@ViewBag.clinicName</label>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Choose Diagnosis Test</label>
-                        <input asp-for="DtestId" class="form-control">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Diagnosis Test</label>
+                                <select asp-for="DtestName" class="form-control" asp-items="new SelectList(ViewBag.dTest) ">
+                                    <option value="">Choose Diagnosis Test </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Reservation Date</label>
-                        <input asp-for="ReservationDate" class="form-control" />
-                        <span asp-validation-for="ReservationDate" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Reservation Date</label>
+                                <input asp-for="ReservationDate" class="form-control" />
+                                <span asp-validation-for="ReservationDate" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="check">
-                        <span>Allow Traffic regulator.</span>
-                        <input type="checkbox" name="terms" onchange="validateTerms()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="check">
+                                <span>Allow Traffic regulator.</span>
+                                <input type="checkbox" name="terms" onchange="validateTerms()">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn_confirm" />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn_confirm" />
+                            </div>
+                        </div>
                     </div>
-
                 </form>
             </div>
-            @*<div>
-                <a asp-action="Index">Back to List</a>
-            </div>*@
         </div>
     </div>
     <script src="~/Styles/FillAppointment/script.js"></script>
 </body>
 </html>
-
-
 
 

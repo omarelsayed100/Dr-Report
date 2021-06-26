@@ -29,7 +29,7 @@ namespace DrReport.Controllers
             if (checkUser != null)
             {
                 // important global variable that could be used in every countroller
-                TempData["accountid"] = checkUser.UserId;
+                TempAccount.AccountId = checkUser.UserId;
                 //***************************************
                 if (checkUser.UserTypeId==1) 
                 {

@@ -33,10 +33,15 @@ namespace DrReport.Controllers
             return View(selectedClinics);
         }
         public ActionResult FillIndex(int id)
-        {
+        {   //clinic setup
             Clinic clinic = _context.Clinics.FirstOrDefault(c=> c.Id==id);
             TempData["ClinicId"] = clinic.Id;
             ViewBag.clinicName = clinic.Name;
+            //diagnosis test setup
+            var dTests= _context.DiagnosisTests.Select(t=>t.Name);
+            var gTests = _context.GeneralDiagnosisTests.Select(t=>t.Name);
+            ViewBag.dTest = dTests.Concat(gTests).ToList();
+
             ViewBag.accountname = TempAccount.AccountName;
             return View();
         }
@@ -44,22 +49,49 @@ namespace DrReport.Controllers
         public IActionResult CreateAppointment(Reserve reserve)
         {
             reserve.ClinicId = (int)TempData["ClinicId"];
+            //get it by the reserve.dTestName
+
+            reserve.PotentialDisease = FindPotentialDisease(reserve.DtestName);
 
             var doctorid = _context.Clinics.FirstOrDefault(c => c.Id == reserve.ClinicId).DoctorId;
             reserve.DoctorId = (int)doctorid;
 
-            int y = (int)TempData["accountid"];
-            int patientId = _context.Patients.FirstOrDefault(p => p.UserId == y).Id;
+            int userId = TempAccount.AccountId;
+            int patientId = _context.Patients.FirstOrDefault(p => p.UserId == userId).Id;
             reserve.PatientId=patientId;
 
             reserve.RequestDate = DateTime.Now;
 
             //DiagnosistestID,Reservationtime that he choose 
-
+            //*proposal concat all the data into one ViewBag*
             _context.Reserves.Add(reserve);
             _context.SaveChanges();
 
             return RedirectToAction("Index", "MakeAppointment");
+        }
+        public string FindPotentialDisease(string diagnosisName)
+        {
+            var x = _context.DiagnosisTests.FirstOrDefault(d => d.Name.Contains(diagnosisName.Trim()));
+            var y = _context.GeneralDiagnosisTests.FirstOrDefault(d => d.Name.Contains(diagnosisName.Trim()));
+            if (x!=null)
+            {
+                var disease = _context.DiseaseRelateDtests.FirstOrDefault(d => d.DtestId == x.Id);
+                if (disease != null) 
+                {
+                    var diseaseName = _context.Diseases.FirstOrDefault(t => t.Id == disease.DiseaseId);
+                    return diseaseName.Name;
+                }
+                else return "";
+            }
+            else {
+                var disease = _context.DiseaseRelateGdtests.FirstOrDefault(d => d.GdtestId == y.Id);
+                if (disease != null)
+                {
+                    var diseaseName = _context.Diseases.FirstOrDefault(t => t.Id == disease.DiseaseId);
+                    return diseaseName.Name;
+                }
+                else return "";
+            }
         }
     }
 }

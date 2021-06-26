@@ -52,7 +52,7 @@ namespace DrReport.Controllers
         }
         //Get selected symptomsIds from select symptoms list
         [HttpPost]
-        public JsonResult GetSelectedSymptoms(string data)
+        public  JsonResult GetSelectedSymptoms(string data)
         {
             if (data!=null)
             {
@@ -85,11 +85,11 @@ namespace DrReport.Controllers
                 TempData["finaldisease_name"] = finalDiseaseName.ToString();
 
                 //Outputs for diagnosis test
-                var diagnosisTestObj = _context.DiseaseRelateDtests.FirstOrDefault(s => s.DiseaseId == finalDiseaseObj.Id);
+                var diagnosisTestObj = _context.DiseaseRelateGdtests.FirstOrDefault(s => s.DiseaseId == finalDiseaseObj.Id);
                 string diagnosisTest;
                 try
                 {
-                    diagnosisTest = _context.DiagnosisTests.FirstOrDefault(d => d.Id == diagnosisTestObj.DtestId).Name;
+                    diagnosisTest = _context.DiagnosisTests.FirstOrDefault(d => d.Id == diagnosisTestObj.GdtestId).Name;
                 }
                 catch (Exception)
                 {
