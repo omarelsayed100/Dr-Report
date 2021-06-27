@@ -28,8 +28,10 @@ namespace DrReport.Controllers
                                on p.UserId equals u.UserId
                                select (u.Fname + " " + u.Lname);
             ViewBag.patientNames = patientNames.ToArray();
+            // * OrderByDesending By Reserve ID
             return View(diagnosisRequests);
         }
+        //Return the patient as Objects from thier list of IDs
         public List<Patient> GetPatientsFromIds(List<int>ids)
         {
             List<Patient> patients = new List<Patient>();

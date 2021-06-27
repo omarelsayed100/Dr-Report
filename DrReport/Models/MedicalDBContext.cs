@@ -485,7 +485,7 @@ namespace DrReport.Models
 
                 entity.Property(e => e.Gender)
                     .IsRequired()
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasDefaultValueSql("('')");
 
