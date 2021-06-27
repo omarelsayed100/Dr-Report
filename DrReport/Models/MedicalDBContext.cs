@@ -34,7 +34,6 @@ namespace DrReport.Models
         public virtual DbSet<GdtestDresult> GdtestDresults { get; set; }
         public virtual DbSet<GeneralDiagnosisTest> GeneralDiagnosisTests { get; set; }
         public virtual DbSet<Give> Gives { get; set; }
-        public virtual DbSet<Greserve> Greserves { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Reserve> Reserves { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -478,43 +477,6 @@ namespace DrReport.Models
                     .HasConstraintName("FK_Give_Patient");
             });
 
-            modelBuilder.Entity<Greserve>(entity =>
-            {
-                entity.HasKey(e => new { e.ClinicId, e.ReservationDate, e.RequestDate });
-
-                entity.ToTable("GReserve");
-
-                entity.Property(e => e.ClinicId).HasColumnName("Clinic_ID");
-
-                entity.Property(e => e.ReservationDate)
-                    .HasColumnType("date")
-                    .HasColumnName("Reservation_Date");
-
-                entity.Property(e => e.RequestDate)
-                    .HasColumnType("date")
-                    .HasColumnName("Request_Date");
-
-                entity.Property(e => e.GdtestId).HasColumnName("GDtest_ID");
-
-                entity.Property(e => e.PatientId).HasColumnName("Patient_ID");
-
-                entity.HasOne(d => d.Clinic)
-                    .WithMany(p => p.Greserves)
-                    .HasForeignKey(d => d.ClinicId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GReserve_Clinic");
-
-                entity.HasOne(d => d.Gdtest)
-                    .WithMany(p => p.Greserves)
-                    .HasForeignKey(d => d.GdtestId)
-                    .HasConstraintName("FK_GReserve_General Diagnosis Test");
-
-                entity.HasOne(d => d.Patient)
-                    .WithMany(p => p.Greserves)
-                    .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK_GReserve_Patient");
-            });
-
             modelBuilder.Entity<Patient>(entity =>
             {
                 entity.ToTable("Patient");
@@ -538,20 +500,11 @@ namespace DrReport.Models
 
             modelBuilder.Entity<Reserve>(entity =>
             {
-                entity.HasKey(e => new { e.ClinicId, e.ReservationDate, e.RequestDate })
-                    .HasName("PK_Reserve_1");
-
                 entity.ToTable("Reserve");
 
+                entity.Property(e => e.Id).HasColumnName("ID");
+
                 entity.Property(e => e.ClinicId).HasColumnName("Clinic_ID");
-
-                entity.Property(e => e.ReservationDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("Reservation_Date");
-
-                entity.Property(e => e.RequestDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("Request_Date");
 
                 entity.Property(e => e.DoctorId).HasColumnName("Doctor_ID");
 
@@ -566,6 +519,14 @@ namespace DrReport.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("Potential_Disease");
+
+                entity.Property(e => e.RequestDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Request_Date");
+
+                entity.Property(e => e.ReservationDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Reservation_Date");
 
                 entity.HasOne(d => d.Clinic)
                     .WithMany(p => p.Reserves)

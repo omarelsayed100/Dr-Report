@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DrReport.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Dynamic;
 
 namespace DrReport.Controllers
 {
@@ -20,14 +21,24 @@ namespace DrReport.Controllers
             var userId = TempAccount.AccountId;
             var doctorId = _context.Doctors.FirstOrDefault(u => u.UserId == userId).Id;
             var diagnosisRequests = _context.Reserves.Where(r=>r.DoctorId==doctorId).ToList();
-
-            //var diagnosisPatientIds = _context.Reserves.Select(p=>p.PatientId).ToList();
-            //foreach (var item in diagnosisPatientIds)
-            //{
-            //    var patientNames =_context.Users.Where(l => l.i).Select(o=>o.Fname+" "+o.Lname)
-            //}
-
+            var patientsIds = diagnosisRequests.Select(p => p.PatientId).ToList();
+            var patients = GetPatientsFromIds(patientsIds);
+            var patientNames = from p in patients
+                               join u in _context.Users
+                               on p.UserId equals u.UserId
+                               select (u.Fname + " " + u.Lname);
+            ViewBag.patientNames = patientNames.ToArray();
             return View(diagnosisRequests);
+        }
+        public List<Patient> GetPatientsFromIds(List<int>ids)
+        {
+            List<Patient> patients = new List<Patient>();
+            foreach (var item in ids)
+            {
+                Patient patient = _context.Patients.FirstOrDefault(p => p.Id == item);
+                patients.Add(patient);
+            }
+            return patients;
         }
     }
 }

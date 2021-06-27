@@ -49,21 +49,19 @@ namespace DrReport.Controllers
         public IActionResult CreateAppointment(Reserve reserve)
         {
             reserve.ClinicId = (int)TempData["ClinicId"];
-            //get it by the reserve.dTestName
-
-            reserve.PotentialDisease = FindPotentialDisease(reserve.DtestName);
-
+            //queries
             var doctorid = _context.Clinics.FirstOrDefault(c => c.Id == reserve.ClinicId).DoctorId;
-            reserve.DoctorId = (int)doctorid;
 
             int userId = TempAccount.AccountId;
             int patientId = _context.Patients.FirstOrDefault(p => p.UserId == userId).Id;
+
+            //fill in reserve data
             reserve.PatientId=patientId;
-
             reserve.RequestDate = DateTime.Now;
+            
+            reserve.DoctorId = (int)doctorid;
+            reserve.PotentialDisease = FindPotentialDisease(reserve.DtestName);
 
-            //DiagnosistestID,Reservationtime that he choose 
-            //*proposal concat all the data into one ViewBag*
             _context.Reserves.Add(reserve);
             _context.SaveChanges();
 

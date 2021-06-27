@@ -9,7 +9,6 @@ namespace DrReport.Models
     {
         public Clinic()
         {
-            Greserves = new HashSet<Greserve>();
             Reserves = new HashSet<Reserve>();
         }
 
@@ -23,7 +22,6 @@ namespace DrReport.Models
         public int? DoctorId { get; set; }
 
         public virtual Doctor Doctor { get; set; }
-        public virtual ICollection<Greserve> Greserves { get; set; }
         public virtual ICollection<Reserve> Reserves { get; set; }
     }
 }

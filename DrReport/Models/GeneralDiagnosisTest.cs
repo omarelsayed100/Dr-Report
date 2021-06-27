@@ -11,7 +11,6 @@ namespace DrReport.Models
         {
             DiseaseRelateGdtests = new HashSet<DiseaseRelateGdtest>();
             GdtestDresults = new HashSet<GdtestDresult>();
-            Greserves = new HashSet<Greserve>();
         }
 
         public int Id { get; set; }
@@ -21,6 +20,5 @@ namespace DrReport.Models
         public virtual Doctor Doctor { get; set; }
         public virtual ICollection<DiseaseRelateGdtest> DiseaseRelateGdtests { get; set; }
         public virtual ICollection<GdtestDresult> GdtestDresults { get; set; }
-        public virtual ICollection<Greserve> Greserves { get; set; }
     }
 }

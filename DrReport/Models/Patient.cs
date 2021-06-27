@@ -11,7 +11,6 @@ namespace DrReport.Models
         {
             Candidates = new HashSet<Candidate>();
             Gives = new HashSet<Give>();
-            Greserves = new HashSet<Greserve>();
             Reserves = new HashSet<Reserve>();
         }
 
@@ -23,7 +22,6 @@ namespace DrReport.Models
         public virtual User User { get; set; }
         public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Give> Gives { get; set; }
-        public virtual ICollection<Greserve> Greserves { get; set; }
         public virtual ICollection<Reserve> Reserves { get; set; }
     }
 }

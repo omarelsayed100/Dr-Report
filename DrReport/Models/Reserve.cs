@@ -7,6 +7,7 @@ namespace DrReport.Models
 {
     public partial class Reserve
     {
+        public int Id { get; set; }
         public int PatientId { get; set; }
         public int ClinicId { get; set; }
         public DateTime ReservationDate { get; set; }
