@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DrReport.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace DrReport.Controllers
@@ -41,10 +42,10 @@ namespace DrReport.Controllers
             }
             return View();
         }
-        
         public IActionResult AddTests()
         {
             string data = (string)TempData["DiagnosisData"];
+
             if (data != null)
             {
                 // Splitting the input data
@@ -59,7 +60,6 @@ namespace DrReport.Controllers
                 
                 TempReportData.DiagnosisTests = diagnosisTests;
             }
-             
             int tempReportId = TempReportData.ReserveId;
             return RedirectToAction("ReportIndex", new { id= tempReportId });
         }
@@ -91,6 +91,41 @@ namespace DrReport.Controllers
                 normals.Add(requiredNormal);
             }
             return normals;
+        }
+        public JsonResult GetGeneralDiagnosisList(string searchTerm)
+        {
+            var gTestList = _context.GeneralDiagnosisTests.ToList();
+            var selectedTests = new List<GeneralDiagnosisTest>();
+            if (searchTerm != null)
+            {
+                selectedTests = gTestList.Where(x => x.Name.Contains(searchTerm)).ToList();
+            }
+            else
+            {
+                selectedTests = gTestList;
+            }
+            var modifiedData = selectedTests.Select(x => new
+            {
+                id = x.Id,
+                text = x.Name
+            });
+            return Json(modifiedData);
+        }
+        public JsonResult GetSelectedGeneralTests(string data)
+        {
+            var generalTestId = data.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse).ToList().First();
+            if (generalTestId != 0)
+            {
+                var g = _context.GdtestRelateDtests.Where(g => g.GdtestId == generalTestId).Select(d => d.Dtest).ToList();
+                TempReportData.DiagnosisTests = g;
+            }
+            return Json(0);
+        }
+        public IActionResult AddGTests()
+        {   // try here
+            int tempReportId = TempReportData.ReserveId;
+            return RedirectToAction("ReportIndex", new { id = tempReportId });
         }
         public JsonResult GetDiagnosisList(string searchTerm)
         {

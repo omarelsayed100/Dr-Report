@@ -41,7 +41,6 @@ namespace DrReport.Controllers
             var dTests= _context.DiagnosisTests.Select(t=>t.Name);
             var gTests = _context.GeneralDiagnosisTests.Select(t=>t.Name);
             ViewBag.dTest = dTests.Concat(gTests).ToList();
-
             ViewBag.accountname = TempAccount.AccountName;
             return View();
         }
