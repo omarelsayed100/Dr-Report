@@ -9,5 +9,10 @@ namespace DrReport.Controllers
     public class TempReportData
     {
         public static int ReserveId { get; set; }
+        public static List<DiagnosisTest> DiagnosisTests { get; set; }
+        public static void IntializeTemp()
+        {
+            DiagnosisTests = new List<DiagnosisTest>();
+        }
     }
 }

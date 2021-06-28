@@ -11,6 +11,5 @@ namespace DrReport.Models
         public int DtestId { get; set; }
 
         public virtual Disease Disease { get; set; }
-        public virtual DiagnosisTest Dtest { get; set; }
     }
 }

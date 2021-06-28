@@ -1,4 +1,5 @@
 ﻿@using DrReport.Models;
+@using System.Linq
 @model IEnumerable<DrReport.Models.DiagnosisTest>
 @{
     ViewData["Title"] = "ReportIndex";
@@ -105,26 +106,29 @@
             <tbody>
                 @if (Model != null)
                 {
+                    int x = 0;
                     foreach (var item in Model)
                     {
                         <tr style="text-align: center;">
                             <td scope="col">@item.Name</td>
-                            <td>Value</td>
+                            <td><input type="text" placeholder="value"/></td>
                             <td>@item.Unit  </td>
-                            <td>12 - 15</td>
+                            <td>@ViewBag.Normal[x]</td>
                             <td>
-                                <button style="background-color: white; border: none;">
+                                <a href="/WriteReport/DeleteTests/@item.Id" style="background-color: white; border: none;">
                                     <img src="~/Styles/Write Report/cancel.png"
                                          width="25px" height="25px" alt="">
-                                </button>
+                                </a>
                             </td>
                         </tr>
+                        x++;
                     }
                 }
             </tbody>
         </table>
         <div class="input" style="text-align-last: center;margin:10px;">
             <button class="btn btn-primary btn-inline-end" type="button">Submit</button>
+            <a href="/WriteReport/ClearTests" class="btn btn-danger btn-inline-end" type="button">Clear</a>
         </div>
     </div>
 </body>

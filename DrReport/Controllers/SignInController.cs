@@ -25,6 +25,9 @@ namespace DrReport.Controllers
         [HttpPost]
         public RedirectToActionResult Signin(User user)
         {
+            //Redirect to Signin and clear TempReportData Class
+            TempReportData.IntializeTemp();
+
             var checkUser = _context.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
             if (checkUser != null)
             {
@@ -47,8 +50,7 @@ namespace DrReport.Controllers
            
                return RedirectToAction("Index", new { message = "No User" });
         }
-
-
+        
 
         // GET: SignInController/Create
         public ActionResult Create()

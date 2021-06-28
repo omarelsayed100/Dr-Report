@@ -32,6 +32,7 @@ namespace DrReport.Models
         public virtual DbSet<DoctorCrudCdoctor> DoctorCrudCdoctors { get; set; }
         public virtual DbSet<DtestDresult> DtestDresults { get; set; }
         public virtual DbSet<GdtestDresult> GdtestDresults { get; set; }
+        public virtual DbSet<GdtestRelateDtest> GdtestRelateDtests { get; set; }
         public virtual DbSet<GeneralDiagnosisTest> GeneralDiagnosisTests { get; set; }
         public virtual DbSet<Give> Gives { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
@@ -191,8 +192,6 @@ namespace DrReport.Models
 
                 entity.Property(e => e.DoctorId).HasColumnName("Doctor_ID");
 
-                entity.Property(e => e.GdtestId).HasColumnName("GDtest_ID");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -286,12 +285,6 @@ namespace DrReport.Models
                     .HasForeignKey(d => d.DiseaseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Disease_relate_Dtest_Disease");
-
-                entity.HasOne(d => d.Dtest)
-                    .WithMany(p => p.DiseaseRelateDtests)
-                    .HasForeignKey(d => d.DtestId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Disease_relate_Dtest_Diagnosis Test");
             });
 
             modelBuilder.Entity<DiseaseRelateGdtest>(entity =>
@@ -424,6 +417,29 @@ namespace DrReport.Models
                     .HasForeignKey(d => d.GdtestId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GDtest_Dresult_General Diagnosis Test");
+            });
+
+            modelBuilder.Entity<GdtestRelateDtest>(entity =>
+            {
+                entity.HasKey(e => new { e.GdtestId, e.DtestId });
+
+                entity.ToTable("GDtest_relate_Dtest");
+
+                entity.Property(e => e.GdtestId).HasColumnName("GDtest_ID");
+
+                entity.Property(e => e.DtestId).HasColumnName("Dtest_ID");
+
+                entity.HasOne(d => d.Dtest)
+                    .WithMany(p => p.GdtestRelateDtests)
+                    .HasForeignKey(d => d.DtestId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GDtest_relate_Dtest_Diagnosis Test");
+
+                entity.HasOne(d => d.Gdtest)
+                    .WithMany(p => p.GdtestRelateDtests)
+                    .HasForeignKey(d => d.GdtestId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GDtest_relate_Dtest_General Diagnosis Test");
             });
 
             modelBuilder.Entity<GeneralDiagnosisTest>(entity =>

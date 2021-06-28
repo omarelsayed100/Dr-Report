@@ -11,6 +11,7 @@ namespace DrReport.Controllers
     public class WriteReportController : Controller
     {
         private readonly MedicalDBContext _context;
+        static bool flag = false;
         public WriteReportController(MedicalDBContext context)
         {
             _context = context;
@@ -26,9 +27,16 @@ namespace DrReport.Controllers
 
             ViewBag.Data = GetAllData(id);
             TempReportData.ReserveId = id;
-            if (TempData["diagnosisTests"]!=null)
+            if (flag==false)
             {
-                List<DiagnosisTest> d = JsonConvert.DeserializeObject<List<DiagnosisTest>>((string)TempData["diagnosisTests"]);
+                TempReportData.IntializeTemp();
+                flag=true;
+            }
+            if (TempReportData.DiagnosisTests != null)
+            {
+                List<DiagnosisTest> d = TempReportData.DiagnosisTests;
+                //normals list
+                ViewBag.Normal = GetNormals();
                 return View(d);
             }
             return View();
@@ -42,17 +50,47 @@ namespace DrReport.Controllers
                 // Splitting the input data
                 List<int> diagnosisTestIds = data.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse).ToList();
-
                 List<DiagnosisTest> diagnosisTests = new List<DiagnosisTest>();
                 foreach (var item in diagnosisTestIds)
                 {
                     var d = _context.DiagnosisTests.FirstOrDefault(d => d.Id == item);
                     diagnosisTests.Add(d);
                 }
-                TempData["diagnosisTests"]= JsonConvert.SerializeObject(diagnosisTests); 
+                
+                TempReportData.DiagnosisTests = diagnosisTests;
             }
+             
             int tempReportId = TempReportData.ReserveId;
             return RedirectToAction("ReportIndex", new { id= tempReportId });
+        }
+        public IActionResult DeleteTests(int id)
+        {
+            var u = TempReportData.DiagnosisTests.FirstOrDefault(d => d.Id == id);
+            TempReportData.DiagnosisTests.Remove(u);
+            int tempReportId = TempReportData.ReserveId;
+            return RedirectToAction("ReportIndex", new { id = tempReportId });
+        }
+        public IActionResult ClearTests()
+        {
+            TempReportData.IntializeTemp();
+            int tempReportId = TempReportData.ReserveId;
+            return RedirectToAction("ReportIndex", new { id = tempReportId });
+        }
+        public List<string> GetNormals()
+        {
+            var diagnosisTests = TempReportData.DiagnosisTests;
+            var reserve = _context.Reserves.FirstOrDefault(r => r.Id == TempReportData.ReserveId);
+            var patient = _context.Patients.FirstOrDefault(p => p.Id == reserve.PatientId);
+            var patientGender = patient.Gender;
+            List<string> normals = new List<string>();
+            foreach (var item in TempReportData.DiagnosisTests)
+            {
+                var normalRanges = _context.DiagnosisTestRanges.Where(r => r.DtestId == item.Id);
+                var selectedNormals = normalRanges.FirstOrDefault(t => t.PatientType == patientGender || t.PatientType == "Neutral");
+                var requiredNormal = selectedNormals.StartRange + " - " + selectedNormals.EndRange;
+                normals.Add(requiredNormal);
+            }
+            return normals;
         }
         public JsonResult GetDiagnosisList(string searchTerm)
         {
