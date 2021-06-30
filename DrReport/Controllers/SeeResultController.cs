@@ -68,9 +68,37 @@ namespace DrReport.Controllers
             ViewBag.Data = GetAllData(reserveId_dResult);
             var dtestDresults = _context.DtestDresults.Where(t => t.DresultId == dResult.Id);
 
+            //Dtest Names  Dtest Units    Dtest Normals
+            var dTestsIds = dtestDresults.Select(d => d.DtestId).ToList();
+            List<DiagnosisTest> diagnosisTests = new List<DiagnosisTest>();
+            List<string> dTestNames = new List<string>();
+            List<string> dTestUnits = new List<string>();
+            foreach (var item in dTestsIds)
+            {
+                var dTest = _context.DiagnosisTests.FirstOrDefault(i=>i.Id==item);
+                diagnosisTests.Add(dTest);
+                dTestNames.Add(dTest.Name);
+                dTestUnits.Add(dTest.Unit);
+            }
+            var normals = GetNormals(diagnosisTests, reserveId_dResult);
+            ViewBag.Normals = normals;
             return View(dtestDresults);
         }
-
+        public List<string> GetNormals(List<DiagnosisTest> diagnosisTests,int reserveId_dResult)
+        {
+            var reserve = _context.Reserves.FirstOrDefault(r => r.Id == reserveId_dResult);
+            var patient = _context.Patients.FirstOrDefault(p => p.Id == reserve.PatientId);
+            var patientGender = patient.Gender;
+            List<string> normals = new List<string>();
+            foreach (var item in diagnosisTests)
+            {
+                var normalRanges = _context.DiagnosisTestRanges.Where(r => r.DtestId == item.Id);
+                var selectedNormals = normalRanges.FirstOrDefault(t => t.PatientType == patientGender || t.PatientType == "Neutral");
+                var requiredNormal = selectedNormals.StartRange + " - " + selectedNormals.EndRange;
+                normals.Add(requiredNormal);
+            }
+            return normals;
+        }
         public List<string> GetAllData(int id)
         {
             var reserve = _context.Reserves.FirstOrDefault(r => r.Id == id);

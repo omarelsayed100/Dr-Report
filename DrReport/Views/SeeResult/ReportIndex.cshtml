@@ -58,14 +58,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr style="text-align: center;">
-                        <td scope="col">HAEMOGOLBIN</td>
-                        <td>@item.ResultValue</td>
-                        <td>gm/dl</td>
-                        <td>12 - 15</td>
-                    </tr>
+                @{
+                    int x = 0;
+                    foreach (var item in Model)
+                    {
+                        <tr style="text-align: center;">
+                            <td scope="col">@item.Dtest.Name</td>
+                            <td>@item.ResultValue</td>
+                            <td>@item.Dtest.Unit</td>
+                            <td>@ViewBag.Normals[x]</td>
+                        </tr> 
+                        x=x+1;
+                    }
+
                 }
 
             </tbody>
