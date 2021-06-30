@@ -10,6 +10,7 @@ namespace DrReport.Models
         public CandidateDoctor()
         {
             Candidates = new HashSet<Candidate>();
+            DiagnosisResults = new HashSet<DiagnosisResult>();
             DoctorCrudCdoctors = new HashSet<DoctorCrudCdoctor>();
         }
 
@@ -20,6 +21,7 @@ namespace DrReport.Models
         public string Specialize { get; set; }
 
         public virtual ICollection<Candidate> Candidates { get; set; }
+        public virtual ICollection<DiagnosisResult> DiagnosisResults { get; set; }
         public virtual ICollection<DoctorCrudCdoctor> DoctorCrudCdoctors { get; set; }
     }
 }

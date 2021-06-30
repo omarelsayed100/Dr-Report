@@ -1,0 +1,79 @@
+
+    .content{
+    padding-top:20px;
+    padding-bottom:20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+    }
+    .form{
+      padding: 0 20px;
+      box-sizing: border-box;
+      width: 700px;
+      height: 540px;
+      background-color: rgb(231, 230, 230) ; 
+     
+    }
+    .data{
+      padding: 25px;
+      height: 100%;
+    }
+    .first{
+      padding-top: 15px;
+    }
+    #stepone{
+      width: 440px;
+      padding: 10px;
+    }
+   
+    .btn_add{
+      background-color: #1576D1;  
+      color: white; 
+      border:none;
+      font-size: 24px ;
+      font-family:Arial, Helvetica, sans-serif;
+      text-align: center;
+      padding: 4px ;
+      border-radius:  4px;
+      width: 90px;
+      margin-top: 3px;
+      margin-bottom: 5px;
+      margin-left: 30px;
+  }
+  .btn_add:hover{
+      background-color: #0b58a0;  
+      color: white; 
+  }
+  .second{
+    padding-top: 35px;
+  }
+    #Area{
+      height: 200px;
+      width: 575px;
+      padding: 10px;
+    }
+    .third{
+      padding-left: 170px;
+      padding-top: 10px;
+    }
+  
+  .btn_send{
+    background-color: #1576D1;  
+    color: white; 
+    border:none;
+    font-size: 24px ;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 4px ;
+    border-radius:  4px;
+    width: 40%;
+    margin-top: 3px;
+    margin-bottom: 5px;
+    margin-left: 30px;
+}
+.btn_send:hover{
+    background-color: #0b58a0;  
+    color: white; 
+}

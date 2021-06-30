@@ -17,12 +17,15 @@ namespace DrReport.Models
         }
 
         public int Id { get; set; }
-        public string AutoDresult { get; set; }
-        public double? StatDresult { get; set; }
+        public int ReserveId { get; set; }
         public string DoctorNote { get; set; }
-        public int? DoctorId { get; set; }
+        public int? CandidateDoctorId { get; set; }
+        public string HasDiagnosis { get; set; }
+        public string AutoDiagnosis { get; set; }
+        public double? Accuracy { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public virtual CandidateDoctor CandidateDoctor { get; set; }
+        public virtual Reserve Reserve { get; set; }
         public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<DiseaseExistDresult> DiseaseExistDresults { get; set; }
         public virtual ICollection<DtestDresult> DtestDresults { get; set; }

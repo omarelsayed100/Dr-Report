@@ -14,7 +14,5 @@ namespace DrReport.Controllers
         {
             DiagnosisTests = new List<DiagnosisTest>();
         }
-        public static string Input { get; set; }
-
     }
 }

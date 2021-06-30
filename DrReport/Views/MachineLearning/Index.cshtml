@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Laytout2.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis</title>
+    <!--Css Link-->
+    <link href="~/Styles/MachineLearning/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class="content">
+    <div class="form">
+        <div class="data">
+            <div class="first">
+                <input id="stepone" type="text" name="search" placeholder="Enter Specialist Doctor's Name">
+                <button id="steptwo" type="button" class="btn_add">Add</button>
+            </div>
+
+            <div class="second">
+                <textarea id="Area" type="text" placeholder="Add Notes"></textarea>
+            </div>
+            <div class="third">
+                <button id="send" type="button" class="btn_send">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

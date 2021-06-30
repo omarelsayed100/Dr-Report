@@ -127,19 +127,33 @@ namespace DrReport.Controllers
             int tempReportId = TempReportData.ReserveId;
             return RedirectToAction("ReportIndex", new { id = tempReportId });
         }
-        public JsonResult GetValues(List<string> input)
+        public IActionResult GetValues(List<string> input)
         {
+            //storing value:DTestId   int two lists
             List<int> diagnosisIds = new List<int>();
             List<string> values = new List<string>();
             foreach (var item in input)
             {
-                var t = item.Split(':');
-                values.Add(t[0].Trim());
-                diagnosisIds.Add(int.Parse(t[1]));
+                var splittedData = item.Split(':');
+                values.Add(splittedData[0].Trim());
+                diagnosisIds.Add(int.Parse(splittedData[1]));
             }
+            // saving the DResult into DB
             DiagnosisResult diagnosisResult = new DiagnosisResult();
-
-            return Json(0);
+            diagnosisResult.ReserveId = TempReportData.ReserveId;
+            _context.DiagnosisResults.Add(diagnosisResult);
+            _context.SaveChanges();
+            //getting the ID of the Last Entered Result
+            for (int i=0;i<diagnosisIds.Count();i++)
+            {
+                DtestDresult dtestDresult = new DtestDresult();
+                dtestDresult.DresultId = diagnosisResult.Id;
+                dtestDresult.DtestId = diagnosisIds[i];
+                dtestDresult.ResultValue = values[i];
+                _context.DtestDresults.Add(dtestDresult);
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index","MachineLearning", new { id = diagnosisResult.Id } );
         }
         public JsonResult GetDiagnosisList(string searchTerm)
         {

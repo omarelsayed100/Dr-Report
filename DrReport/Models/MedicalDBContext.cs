@@ -164,24 +164,35 @@ namespace DrReport.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.AutoDresult)
+                entity.Property(e => e.AutoDiagnosis)
                     .HasMaxLength(50)
                     .IsUnicode(false)
-                    .HasColumnName("Auto_Dresult");
+                    .HasColumnName("Auto_Diagnosis");
 
-                entity.Property(e => e.DoctorId).HasColumnName("Doctor_ID");
+                entity.Property(e => e.CandidateDoctorId).HasColumnName("Candidate_Doctor_ID");
 
                 entity.Property(e => e.DoctorNote)
                     .HasMaxLength(200)
                     .IsUnicode(false)
                     .HasColumnName("Doctor_Note");
 
-                entity.Property(e => e.StatDresult).HasColumnName("Stat_Dresult");
+                entity.Property(e => e.HasDiagnosis)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Has_Diagnosis");
 
-                entity.HasOne(d => d.Doctor)
+                entity.Property(e => e.ReserveId).HasColumnName("Reserve_ID");
+
+                entity.HasOne(d => d.CandidateDoctor)
                     .WithMany(p => p.DiagnosisResults)
-                    .HasForeignKey(d => d.DoctorId)
-                    .HasConstraintName("FK_Diagnosis Result_Doctor");
+                    .HasForeignKey(d => d.CandidateDoctorId)
+                    .HasConstraintName("FK_Diagnosis Result_Candidate Doctor");
+
+                entity.HasOne(d => d.Reserve)
+                    .WithMany(p => p.DiagnosisResults)
+                    .HasForeignKey(d => d.ReserveId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Diagnosis Result_Reserve");
             });
 
             modelBuilder.Entity<DiagnosisTest>(entity =>
@@ -381,7 +392,10 @@ namespace DrReport.Models
 
                 entity.Property(e => e.DtestId).HasColumnName("Dtest_ID");
 
-                entity.Property(e => e.ResultValue).HasColumnName("Result_Value");
+                entity.Property(e => e.ResultValue)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Result_Value");
 
                 entity.HasOne(d => d.Dresult)
                     .WithMany(p => p.DtestDresults)
