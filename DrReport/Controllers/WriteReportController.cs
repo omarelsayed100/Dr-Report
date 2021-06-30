@@ -127,6 +127,7 @@ namespace DrReport.Controllers
             int tempReportId = TempReportData.ReserveId;
             return RedirectToAction("ReportIndex", new { id = tempReportId });
         }
+        // from jquery 
         public IActionResult GetValues(List<string> input)
         {
             //storing value:DTestId   int two lists

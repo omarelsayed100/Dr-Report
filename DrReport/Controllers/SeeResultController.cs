@@ -19,9 +19,19 @@ namespace DrReport.Controllers
             ViewBag.accountname = TempAccount.AccountName;
             int patientId = _context.Patients.FirstOrDefault(p => p.UserId == TempAccount.AccountId).Id;
             var reserves = _context.Reserves.Where(r => r.PatientId == patientId).ToList();
+            List<DiagnosisResult> results = new List<DiagnosisResult>();
+            foreach (var item in reserves)
+            {
+                var result = _context.DiagnosisResults.FirstOrDefault(r => r.ReserveId == item.Id);
+                if (result!=null)
+                {
+                    results.Add(result);
+                }
+            }
+            
             var reservationData = GetReservationData(reserves);
             // viewbag of all data
-            return View(reserves);
+            return View(results);
         }
         public IEnumerable<string> GetReservationData(List<Reserve> reserve)
         {
@@ -49,13 +59,16 @@ namespace DrReport.Controllers
 
         }
 
-        //id ==> Reservation Id
+        //id ~==>  DResultID
         public IActionResult ReportIndex(int id)
         {
             ViewBag.accountname = TempAccount.AccountName;
-            ViewBag.Data = GetAllData(id);
+            var dResult = _context.DiagnosisResults.FirstOrDefault(r => r.Id == id);
+            var reserveId_dResult = dResult.ReserveId;
+            ViewBag.Data = GetAllData(reserveId_dResult);
+            var dtestDresults = _context.DtestDresults.Where(t => t.DresultId == dResult.Id);
 
-            return View();
+            return View(dtestDresults);
         }
 
         public List<string> GetAllData(int id)

@@ -1,5 +1,5 @@
 ﻿@using DrReport.Models;
-@model IEnumerable<DrReport.Models.Reserve>
+@model IEnumerable<DrReport.Models.DiagnosisResult>
 @{
     ViewData["Title"] = "Index";
  Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,10 +22,10 @@
             foreach (var item in Model)
             {
             <tr style="text-align: center;">
-                <td scope="col">DR. @item.Doctor.User.Fname @item.Doctor.User.Lname</td>
-                <td>@item.Clinic.Name</td>
-                <td>@item.ReservationDate</td>
-                <td>@item.DtestName</td>
+                <td scope="col">DR. @item.Reserve.Doctor.User.Fname @item.Reserve.Doctor.User.Lname</td>
+                <td>@item.Reserve.Clinic.Name</td>
+                <td>@item.Reserve.ReservationDate</td>
+                <td>@item.Reserve.DtestName</td>
                 <td> <a href="/SeeResult/ReportIndex/@item.Id" class=" btn btn-primary btn-sm btn-inline-center">Open Result</a></td>
             </tr>
             }
