@@ -127,6 +127,20 @@ namespace DrReport.Controllers
             int tempReportId = TempReportData.ReserveId;
             return RedirectToAction("ReportIndex", new { id = tempReportId });
         }
+        public JsonResult GetValues(List<string> input)
+        {
+            List<int> diagnosisIds = new List<int>();
+            List<string> values = new List<string>();
+            foreach (var item in input)
+            {
+                var t = item.Split(':');
+                values.Add(t[0].Trim());
+                diagnosisIds.Add(int.Parse(t[1]));
+            }
+            DiagnosisResult diagnosisResult = new DiagnosisResult();
+
+            return Json(0);
+        }
         public JsonResult GetDiagnosisList(string searchTerm)
         {
             var testList = _context.DiagnosisTests.ToList();

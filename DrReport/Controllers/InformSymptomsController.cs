@@ -18,10 +18,10 @@ namespace DrReport.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.accountname = TempAccount.AccountName;
-            ViewBag.diagnosistest = TempData["diagnosistest"];
-            ViewBag.precaution = TempData["precaution"];
+            ViewBag.accountname = TempAccount.AccountName;  
             ViewBag.finaldisease_name = TempData["finaldisease_name"];
+            ViewBag.precaution = TempData["precaution"];
+            ViewBag.diagnosistest = TempData["diagnosistest"];
 
             return View();
         }
@@ -96,13 +96,20 @@ namespace DrReport.Controllers
                     diagnosisTest = "No Diagnosis Test Attached To This Disease";
                 }
                 TempData["diagnosistest"] = diagnosisTest.ToString();
-
                 //Calcuating the accuracy
                 double accuarcy = ((double)CountOccurenceOfValue(diseaseIds, (int)mostFrequentDisease) / (double)diseaseIds.Count);
+                //ConfirmSymptoms();
             }
             return Json(0);
         }
-     
+        //public void ConfirmSymptoms( )
+        //{
+        //    TempInform.Disease = (string)TempData["finaldisease_name"];
+        //    TempInform.DiagnosisTest = (string)TempData["diagnosistest"];
+        //    TempInform.Precaution = (string)TempData["precaution"];
+        //}
+        
+
         //Number of occurence of a specific value in a list
         public int CountOccurenceOfValue(List<int?> list, int valueToFind)
         {
