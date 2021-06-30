@@ -143,7 +143,7 @@ namespace DrReport.Controllers
             diagnosisResult.ReserveId = TempReportData.ReserveId;
             _context.DiagnosisResults.Add(diagnosisResult);
             _context.SaveChanges();
-            //getting the ID of the Last Entered Result
+            // saving in DTest_DResult into DB
             for (int i=0;i<diagnosisIds.Count();i++)
             {
                 DtestDresult dtestDresult = new DtestDresult();
